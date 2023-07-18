@@ -48,6 +48,12 @@ public class CounterController {
     return ApiResponse.ok(count);
   }
 
+  @GetMapping(value = "/api/find-treasure")
+  public ApiResponse testWhatYouGot() {
+    logger.info(String.format("yes, you have got here: %s", "find-treasure"));
+    final String gold = "you have successfully found GOLD!";
+    return ApiResponse.ok(gold);
+  }
 
   /**
    * 更新计数，自增或者清零
