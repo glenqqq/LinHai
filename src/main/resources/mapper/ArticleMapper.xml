@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.ArticleMapper">
+
+    <resultMap id="articleMapper" type="com.tencent.wxcloudrun.model.Article">
+        <id property="articleId" column="articleId"/>
+        <result property="title" column="title"/>
+    </resultMap>
+
+    <insert id="createArticle" parameterType="com.tencent.wxcloudrun.model.Article">
+        INSERT INTO `Articles`(`articleId`, `title`)
+            VALUE(#{articleId}, #{title})
+    </insert>
+
+</mapper>
