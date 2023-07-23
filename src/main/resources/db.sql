@@ -10,4 +10,4 @@ CREATE TABLE `Articles` (
     `articleId` varchar NOT NULL,
     `title` varchar NOT NULL DEFAULT '1',
     PRIMARY KEY (`articleId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
