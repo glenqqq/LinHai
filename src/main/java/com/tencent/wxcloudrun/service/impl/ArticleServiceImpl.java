@@ -27,4 +27,9 @@ public class ArticleServiceImpl implements ArticleSerice {
         mapper.createArticle(article);
         return articleId;
     }
+
+    @Override
+    public Article getArticleById(String articleId) {
+        return mapper.getArticleById(articleId);
+    }
 }

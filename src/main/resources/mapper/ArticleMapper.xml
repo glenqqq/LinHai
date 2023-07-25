@@ -7,6 +7,12 @@
         <result property="title" column="title"/>
     </resultMap>
 
+    <select id="getArticleById" resultMap="articleMapper" parameterType="java.lang.String">
+        SELECT `articleId`, `title`
+        FROM Articles
+        WHERE articleId = #{articleId}
+    </select>
+
     <insert id="createArticle" parameterType="com.tencent.wxcloudrun.model.Article">
         INSERT INTO `Articles`(`articleId`, `title`)
             VALUE(#{articleId}, #{title})
