@@ -41,8 +41,8 @@ public class ArticleController {
         return ApiResponse.ok(retrievedArticle);
     }
 
-    @GetMapping(value = "/api/article-management/search-by-tile}")
-    ApiResponse searchArticleByTitle(String target) {
+    @GetMapping(value = "/api/article-management/search-by-tile/{target}")
+    ApiResponse searchArticleByTitle(@PathVariable String target) {
         logger.info(String.format("requesting search article by title: %s", target));
         List<Article> retrievedArticle = articleSerice.searchArticleByTitle(target);
         return ApiResponse.ok(retrievedArticle);
