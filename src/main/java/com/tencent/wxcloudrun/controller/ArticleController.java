@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 public class ArticleController {
@@ -36,6 +38,13 @@ public class ArticleController {
     ApiResponse getArticleById(@PathVariable String articleId) {
         logger.info(String.format("requesting article by id: %s", articleId));
         Article retrievedArticle = articleSerice.getArticleById(articleId);
+        return ApiResponse.ok(retrievedArticle);
+    }
+
+    @GetMapping(value = "/api/article-management/search-by-tile}")
+    ApiResponse searchArticleByTitle(String target) {
+        logger.info(String.format("requesting search article by title: %s", target));
+        List<Article> retrievedArticle = articleSerice.searchArticleByTitle(target);
         return ApiResponse.ok(retrievedArticle);
     }
 }

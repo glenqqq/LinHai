@@ -7,6 +7,7 @@ import com.tencent.wxcloudrun.service.ArticleSerice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -32,4 +33,7 @@ public class ArticleServiceImpl implements ArticleSerice {
     public Article getArticleById(String articleId) {
         return mapper.getArticleById(articleId);
     }
+
+    @Override
+    public List<Article> searchArticleByTitle(String target) {return mapper.searchArticleByTitle(target);}
 }
