@@ -5,6 +5,25 @@
     <resultMap id="articleMapper" type="com.tencent.wxcloudrun.model.Article">
         <id property="articleId" column="articleId"/>
         <result property="title" column="title"/>
+        <result property="articleType" column="articleType"/>
+        <result property="merchantCategory" column="merchantCategory"/>
+        <result property="images" column="images" javaType="java.util.List"/>
+        <result property="content" column="content"/>
+        <result property="price" column="price"/>
+        <result property="isDeliveryCovered" column="isDeliveryCovered"/>
+        <result property="deliveryMethod" column="deliveryMethod"/>
+        <result property="location" column="location"/>
+        <result property="isNeedHelp" column="isNeedHelp"/>
+        <result property="createTimestamp" column="createTimestamp" javaType="java.math.BigDecimal"/>
+        <result property="updateTimestamp" column="updateTimestamp" javaType="java.math.BigDecimal"/>
+        <result property="authorName" column="authorName"/>
+        <result property="authorId" column="authorId"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="likeCount" column="likeCount"/>
+        <result property="viewCount" column="viewCount"/>
+        <result property="colCount" column="colCount"/>
+        <result property="isStickTop" column="isStickTop"/>
     </resultMap>
 
     <select id="searchArticleByTitle" resultMap="articleMapper" parameterType="java.lang.String">
@@ -14,7 +33,7 @@
     </select>
 
     <select id="getArticleById" resultMap="articleMapper" parameterType="java.lang.String">
-        SELECT `articleId`, `title`
+        SELECT *
         FROM Articles
         WHERE articleId = #{articleId}
     </select>
