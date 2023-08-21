@@ -8,6 +8,9 @@
         <result property="articleType" column="articleType"/>
         <result property="merchantCategory" column="merchantCategory"/>
         <result property="images" column="images" javaType="java.util.List"/>
+        <collection property="images" ofType="String">
+            <id column="images"/>
+        </collection>
         <result property="content" column="content"/>
         <result property="price" column="price"/>
         <result property="isDeliveryCovered" column="isDeliveryCovered"/>
