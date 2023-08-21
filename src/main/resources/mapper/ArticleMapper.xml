@@ -8,9 +8,6 @@
         <result property="articleType" column="articleType"/>
         <result property="merchantCategory" column="merchantCategory"/>
         <result property="images" column="images" javaType="java.util.List"/>
-        <collection property="images" ofType="String">
-            <id column="images"/>
-        </collection>
         <result property="content" column="content"/>
         <result property="price" column="price"/>
         <result property="isDeliveryCovered" column="isDeliveryCovered"/>
@@ -27,6 +24,9 @@
         <result property="viewCount" column="viewCount"/>
         <result property="colCount" column="colCount"/>
         <result property="isStickTop" column="isStickTop"/>
+        <collection property="images" ofType="String">
+            <id column="images"/>
+        </collection>
     </resultMap>
 
     <select id="searchArticleByTitle" resultMap="articleMapper" parameterType="java.lang.String">
