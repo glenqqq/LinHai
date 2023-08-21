@@ -5,28 +5,25 @@
     <resultMap id="articleMapper" type="com.tencent.wxcloudrun.model.Article">
         <id property="articleId" column="articleId"/>
         <result property="title" column="title"/>
-        <result property="articleType" column="articleType"/>
-        <result property="merchantCategory" column="merchantCategory"/>
-        <result property="images" column="images" javaType="java.util.List"/>
+        <result property="articleType" column="article_type"/>
+        <result property="merchantCategory" column="merchant_category"/>
         <result property="content" column="content"/>
         <result property="price" column="price"/>
-        <result property="isDeliveryCovered" column="isDeliveryCovered"/>
-        <result property="deliveryMethod" column="deliveryMethod"/>
+        <result property="isDeliveryCovered" column="is_delivery_covered"/>
+        <result property="deliveryMethod" column="delivery_method"/>
         <result property="location" column="location"/>
-        <result property="isNeedHelp" column="isNeedHelp"/>
-        <result property="createTimestamp" column="createTimestamp" javaType="java.math.BigDecimal"/>
-        <result property="updateTimestamp" column="updateTimestamp" javaType="java.math.BigDecimal"/>
-        <result property="authorName" column="authorName"/>
-        <result property="authorId" column="authorId"/>
+        <result property="isNeedHelp" column="is_need_help"/>
+        <result property="createTimestamp" column="create_timestamp" javaType="java.math.BigDecimal"/>
+        <result property="updateTimestamp" column="update_timestamp" javaType="java.math.BigDecimal"/>
+        <result property="authorName" column="author_name"/>
+        <result property="authorId" column="author_id"/>
         <result property="latitude" column="latitude"/>
         <result property="longitude" column="longitude"/>
-        <result property="likeCount" column="likeCount"/>
-        <result property="viewCount" column="viewCount"/>
+        <result property="likeCount" column="like_count"/>
+        <result property="viewCount" column="view_count"/>
         <result property="colCount" column="colCount"/>
-        <result property="isStickTop" column="isStickTop"/>
-        <collection property="images" ofType="String">
-            <id column="images"/>
-        </collection>
+        <result property="isStickTop" column="is_stick_top"/>
+        <collection property="images" column="images" ofType="java.lang.String" javaType="java.util.List"/>
     </resultMap>
 
     <select id="searchArticleByTitle" resultMap="articleMapper" parameterType="java.lang.String">
