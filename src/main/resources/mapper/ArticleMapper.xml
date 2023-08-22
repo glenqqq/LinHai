@@ -27,9 +27,12 @@
     </resultMap>
 
     <select id="searchArticleByTitle" resultType="com.tencent.wxcloudrun.model.Article" parameterType="java.lang.String">
-        SELECT *
-        FROM Articles
-        WHERE CONTAINS(title, #{target});
+        SELECT * FROM Articles
+        <where>
+            <if test="title != null and title != ''">
+                title like concat('%', #{target}, '%')
+            </if>
+        </where>
     </select>
 
     <select id="getArticleById" resultMap="articleMapper" parameterType="java.lang.String">
