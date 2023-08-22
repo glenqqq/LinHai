@@ -26,13 +26,11 @@
         <collection property="images" column="images" ofType="java.lang.String" javaType="java.util.ArrayList"/>
     </resultMap>
 
-    <select id="searchArticleByTitle" resultType="com.tencent.wxcloudrun.model.Article" parameterType="java.lang.String">
-        SELECT * FROM Articles
-        <where>
-            <if test="title != null and title != ''">
-                title like concat('%', #{target}, '%')
-            </if>
-        </where>
+    <select id="searchArticleByTitle" resultMap="articleMapper" parameterType="java.lang.String">
+        SELECT *
+        FROM Articles
+        WHERE title like concat('%', #{target}, '%')
+
     </select>
 
     <select id="getArticleById" resultMap="articleMapper" parameterType="java.lang.String">
