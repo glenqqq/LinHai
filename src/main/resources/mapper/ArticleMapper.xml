@@ -29,7 +29,7 @@
     <select id="searchArticleByTitle" resultType="com.tencent.wxcloudrun.model.Article" parameterType="java.lang.String">
         SELECT *
         FROM Articles
-        WHERE title LIKE '%' || #{target} || '%'
+        WHERE CONTAINS(title, #{target});
     </select>
 
     <select id="getArticleById" resultMap="articleMapper" parameterType="java.lang.String">
