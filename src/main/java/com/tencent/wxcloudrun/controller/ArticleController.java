@@ -28,7 +28,7 @@ public class ArticleController {
      */
     @PostMapping(value = "/api/article-management")
     ApiResponse createArticle(@RequestBody CreateArticleRequest request) {
-        logger.info("/api/article createArticle request");
+        logger.info("/api/article createArticle request: {}", request);
         final String articleId = articleSerice.createArticle(request);
 
         return ApiResponse.ok(articleId);
