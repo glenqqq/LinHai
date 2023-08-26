@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.controller;
 
+import com.sun.tools.javac.util.DefinedBy;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.dto.article.CreateArticleRequest;
 import com.tencent.wxcloudrun.model.Article;
@@ -45,6 +46,13 @@ public class ArticleController {
     ApiResponse searchArticleByTitle(@PathVariable String target) {
         logger.info(String.format("requesting search article by title: %s", target));
         List<Article> retrievedArticle = articleSerice.searchArticleByTitle(target);
+        return ApiResponse.ok(retrievedArticle);
+    }
+
+    @GetMapping(value = "/api/article-management/recent-ten-articles")
+    ApiResponse getTenArticles() {
+        logger.info(String.format("get recent 10 articles"));
+        List<Article> retrievedArticle = articleSerice.getRecentTenArticles();
         return ApiResponse.ok(retrievedArticle);
     }
 }

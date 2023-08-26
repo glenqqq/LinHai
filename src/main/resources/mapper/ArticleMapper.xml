@@ -25,13 +25,14 @@
         <result property="isStickTop" column="is_stick_top"/>
         <collection property="images" column="images" ofType="java.lang.String" javaType="java.util.ArrayList"/>
     </resultMap>
-
+<!--
     <select id="searchArticleByTitle" resultMap="articleMapper" parameterType="java.lang.String">
         SELECT *
         FROM Articles
         WHERE title like concat('%', #{target}, '%')
 
     </select>
+-->
 
     <select id="getArticleById" resultMap="articleMapper" parameterType="java.lang.String">
         SELECT *
@@ -43,5 +44,11 @@
         INSERT INTO `Articles`(`articleId`, `title`, `article_type`, `merchant_category`, `content`, `price`, `is_delivery_covered`, `delivery_method`, `location`, `is_need_help`, `create_timestamp`, `update_timestamp`, `author_name`, `latitude`, `longitude`, `like_count`,`view_count`, `col_count`, `is_stick_top`, `images`)
             VALUE(#{articleId}, #{title}, #{articleType}, #{merchantCategory}, #{content}, #{price}, #{isDeliveryCovered}, #{deliveryMethod}, #{location}, #{isNeedHelp}, #{createTimestamp}, #{updateTimestamp}, #{authorName}, #{authorId}, #{latitude}, #{longitude}, #{likeCount}, #{viewCount}, #{colCount}, #{isStickTop}, #{images,jdbcType=VARCHAR})
     </insert>
+
+    <select id="getRecentTenArticles" resultMap="articleMapper">
+        SELECT *
+        FROM Articles
+        ORDER BY articleId DESC limit 10
+    </select>
 
 </mapper>
