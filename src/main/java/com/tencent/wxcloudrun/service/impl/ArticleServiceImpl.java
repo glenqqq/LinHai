@@ -25,7 +25,7 @@ public class ArticleServiceImpl implements ArticleSerice {
                 .articleId(articleId)
                 .articleType(request.getArticleType())
                 .merchantCategory(request.getMerchantCategory())
-                .images(request.getImages())
+                 //.images(request.getImages())
                 .content(request.getContent())
                 .price(request.getPrice())
                 .isDeliveryCovered(request.getIsDeliveryCovered())
