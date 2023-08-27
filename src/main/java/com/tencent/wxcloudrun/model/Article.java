@@ -11,16 +11,16 @@ import java.util.List;
 public class Article {
     private String articleId;
     private String title;
-    private int articleType;
+    private Integer articleType;
     private String merchantCategory;
     //private List<String> images;
     private String content; // default empty
     private Double price;
-    private boolean isDeliveryCovered;
-    private int deliveryMethod;
+    private Boolean isDeliveryCovered;
+    private Integer deliveryMethod;
     private String location;
 
-    private boolean isNeedHelp;
+    private Boolean isNeedHelp;
 
     private Long createTimestamp;
     private Long updateTimestamp;
@@ -33,5 +33,5 @@ public class Article {
     private Long likeCount;
     private Long viewCount;
     private Long colCount;
-    private boolean isStickTop;
+    private Boolean isStickTop;
 }
