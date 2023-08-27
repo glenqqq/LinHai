@@ -13,7 +13,6 @@ public class Article {
     private String title;
     private Integer articleType;
     private String merchantCategory;
-    private List<String> images;
     private String content; // default empty
     private Double price;
     private Boolean isDeliveryCovered;
@@ -34,4 +33,5 @@ public class Article {
     private Long viewCount;
     private Long colCount;
     private Boolean isStickTop;
+    private String images;
 }
