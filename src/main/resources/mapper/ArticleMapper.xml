@@ -5,7 +5,7 @@
     <resultMap id="articleMapper" type="com.tencent.wxcloudrun.model.Article">
         <id property="articleId" column="articleId"/>
         <result property="title" column="title"/>
-        <result property="articleType" column="articleType"/>
+        <result property="articleType" column="articleType" javaType="java.lang.Integer"/>
         <result property="merchantCategory" column="merchantCategory"/>
         <result property="content" column="content"/>
         <result property="price" column="price"/>
@@ -47,7 +47,7 @@
     <select id="getRecentTenArticles" resultMap="articleMapper">
         SELECT *
         FROM Articles
-        ORDER BY articleId DESC limit 10
+        ORDER BY articleId DESC limit 10 OFFSET 0
     </select>
 
 </mapper>
