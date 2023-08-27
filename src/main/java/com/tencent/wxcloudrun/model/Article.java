@@ -13,7 +13,7 @@ public class Article {
     private String title;
     private Integer articleType;
     private String merchantCategory;
-    //private List<String> images;
+    private List<String> images;
     private String content; // default empty
     private Double price;
     private Boolean isDeliveryCovered;
