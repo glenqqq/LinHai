@@ -24,14 +24,12 @@
         <result property="colCount" column="col_count"/>
         <result property="isStickTop" column="is_stick_top"/>
     </resultMap>
-<!--
+
     <select id="searchArticleByTitle" resultMap="articleMapper" parameterType="java.lang.String">
         SELECT *
         FROM Articles
         WHERE title like concat('%', #{target}, '%')
-
     </select>
--->
 
     <select id="getArticleById" resultMap="articleMapper" parameterType="java.lang.String">
         SELECT *

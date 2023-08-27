@@ -12,9 +12,7 @@ public interface ArticleMapper {
 
     Article getArticleById(String articleId);
 
-    /**
     List<Article> searchArticleByTitle(@Param("target") String target);
-     **/
 
     List<Article> getRecentTenArticles();
 }

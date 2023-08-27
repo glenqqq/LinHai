@@ -54,7 +54,7 @@ public class ArticleServiceImpl implements ArticleSerice {
 
     @Override
     public List<Article> searchArticleByTitle(String target) {
-        return null;
+        return mapper.searchArticleByTitle(target);
     }
 
     @Override
