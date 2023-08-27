@@ -5,24 +5,24 @@
     <resultMap id="articleMapper" type="com.tencent.wxcloudrun.model.Article">
         <id property="articleId" column="articleId"/>
         <result property="title" column="title"/>
-        <result property="articleType" column="articleType" javaType="java.lang.Integer"/>
-        <result property="merchantCategory" column="merchantCategory"/>
+        <result property="articleType" column="article_type"/>
+        <result property="merchantCategory" column="merchant_category"/>
         <result property="content" column="content"/>
         <result property="price" column="price"/>
-        <result property="isDeliveryCovered" column="isDeliveryCovered"/>
-        <result property="deliveryMethod" column="deliveryMethod"/>
+        <result property="isDeliveryCovered" column="is_delivery_covered"/>
+        <result property="deliveryMethod" column="delivery_method"/>
         <result property="location" column="location"/>
-        <result property="isNeedHelp" column="isNeedHelp"/>
-        <result property="createTimestamp" column="createTimestamp" javaType="java.math.BigDecimal"/>
-        <result property="updateTimestamp" column="updateTimestamp" javaType="java.math.BigDecimal"/>
-        <result property="authorName" column="authorName"/>
-        <result property="authorId" column="authorId"/>
-        <result property="latitude" column="latitude"/>
-        <result property="longitude" column="longitude"/>
-        <result property="likeCount" column="likeCount"/>
-        <result property="viewCount" column="viewCount"/>
-        <result property="colCount" column="colCount"/>
-        <result property="isStickTop" column="isStickTop"/>
+        <result property="isNeedHelp" column="is_need_help"/>
+        <result property="createTimestamp" column="create_timestamp"/>
+        <result property="updateTimestamp" column="update_timestamp"/>
+        <result property="authorName" column="author_name"/>
+        <result property="authorId" column="author_id"/>
+        <result property="latitude" column="latitude" javaType="java.math.BigDecimal"/>
+        <result property="longitude" column="longitude" javaType="java.math.BigDecimal"/>
+        <result property="likeCount" column="like_count"/>
+        <result property="viewCount" column="view_count"/>
+        <result property="colCount" column="col_count"/>
+        <result property="isStickTop" column="is_stick_top"/>
     </resultMap>
 <!--
     <select id="searchArticleByTitle" resultMap="articleMapper" parameterType="java.lang.String">
@@ -40,7 +40,7 @@
     </select>
 
     <insert id="createArticle" parameterType="com.tencent.wxcloudrun.model.Article">
-        INSERT INTO `Articles`(`articleId`, `title`, `articleType`, `merchantCategory`, `content`, `price`, `isDeliveryCovered`, `deliveryMethod`, `location`, `isNeedHelp`, `createTimestamp`, `updateTimestamp`, `authorName`, `authorId`, `latitude`, `longitude`, `likeCount`,`viewCount`, `colCount`, `isStickTop`)
+        INSERT INTO `Articles`(`articleId`, `title`, `article_type`, `merchant_category`, `content`, `price`, `is_delivery_covered`, `delivery_method`, `location`, `is_need_help`, `create_timestamp`, `update_timestamp`, `author_name`, `author_id`, `latitude`, `longitude`, `like_count`,`view_count`, `col_count`, `is_stick_top`)
             VALUE(#{articleId}, #{title}, #{articleType}, #{merchantCategory}, #{content}, #{price}, #{isDeliveryCovered}, #{deliveryMethod}, #{location}, #{isNeedHelp}, #{createTimestamp}, #{updateTimestamp}, #{authorName}, #{authorId}, #{latitude}, #{longitude}, #{likeCount}, #{viewCount}, #{colCount}, #{isStickTop})
     </insert>
 
