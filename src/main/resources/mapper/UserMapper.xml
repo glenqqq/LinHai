@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.UserMapper">
+
+    <resultMap id="userMapper" type="com.tencent.wxcloudrun.model.User">
+        <id property="userId" column="user_id"/>
+        <result property="openId" column="open_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="profileImageUrl" column="profile_image_url"/>
+        <result property="location" column="location"/>
+        <result property="locationId" column="location_id"/>
+        <result property="gender" column="gender"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+    </resultMap>
+
+    <select id="searchUserByUserName" resultMap="userMapper" parameterType="java.lang.String">
+        SELECT *
+        FROM Users
+        WHERE title like concat('%', #{target}, '%')
+    </select>
+
+    <select id="getUserByUserId" resultMap="userMapper" parameterType="java.lang.String">
+        SELECT *
+        FROM Users
+        WHERE userId = #{userId}
+    </select>
+
+    <insert id="createUser" parameterType="com.tencent.wxcloudrun.model.User">
+        INSERT INTO `Users`(`user_id`, `open_id`, `user_name`, `profile_image_url`, `location`, `location_id`, `gender`, `longitude`, `latitude`)
+            VALUE(#{userId}, #{openId}, #{userName}, #{profileImageUrl}, #{location}, #{locationId}, #{gender}, #{longitude}, #{latitude})
+    </insert>
+
+
+</mapper>
