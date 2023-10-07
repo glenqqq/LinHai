@@ -22,7 +22,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public String createUser(CreateUserRequest request) {
         final String userId = UUID.randomUUID().toString();
-        mapper.createUser(request);
+        User newUser = User.builder()
+                .userId(userId)
+                .openId(request.getOpenId())
+                .locationId(request.getLocationId())
+                .location(request.getLocation())
+                .userName(request.getUserName())
+                .profileImageUrl(request.getProfileImageUrl())
+                .latitude(request.getLatitude())
+                .longitude(request.getLongitude())
+                .gender(request.getGender())
+                .build();
+        mapper.createUser(newUser);
         return userId;
     }
 

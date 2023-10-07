@@ -1,5 +1,10 @@
 package com.tencent.wxcloudrun.model;
 
+import lombok.Getter;
+import lombok.Builder;
+
+@Builder
+@Getter
 public class User {
     private String openId;
     private String userId;
