@@ -23,7 +23,7 @@
     <select id="getUserByUserId" resultMap="userMapper" parameterType="java.lang.String">
         SELECT *
         FROM Users
-        WHERE userId = #{userId}
+        WHERE user_id = #{userId}
     </select>
 
     <insert id="createUser" parameterType="com.tencent.wxcloudrun.model.User">
