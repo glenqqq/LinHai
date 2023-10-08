@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -27,12 +28,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public String createUser(CreateUserRequest request) {
         final String userId = UUID.randomUUID().toString();
+        final String userName = "Linhai-"+ UUID.randomUUID();
         User newUser = User.builder()
                 .userId(userId)
                 .openId(request.getOpenId())
                 .locationId(request.getLocationId())
                 .location(request.getLocation())
-                .userName(request.getUserName())
+                .userName(userName)
                 .profileImageUrl(request.getProfileImageUrl())
                 .latitude(request.getLatitude())
                 .longitude(request.getLongitude())
@@ -40,7 +42,7 @@ public class UserServiceImpl implements UserService {
                 .build();
         logger.info("creating new user: {}", newUser);
         mapper.createUser(newUser);
-        return userId;
+        return userName;
     }
 
     @Override
