@@ -20,7 +20,7 @@ public class UserController {
 
     public UserController(@Autowired UserService userService) {
         this.userService = userService;
-        this.logger = LoggerFactory.getLogger(CounterController.class);
+        this.logger = LoggerFactory.getLogger(UserController.class);
     }
 
     @PostMapping(value = "/api/user-management/new-user")
