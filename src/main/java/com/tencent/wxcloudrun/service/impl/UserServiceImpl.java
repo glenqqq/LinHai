@@ -5,7 +5,6 @@ import com.tencent.wxcloudrun.dao.UserMapper;
 import com.tencent.wxcloudrun.dto.user.CreateUserRequest;
 import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.service.UserService;
-import lombok.extern.log4j.Log4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@Log4j
 public class UserServiceImpl implements UserService {
 
     final UserMapper mapper;
