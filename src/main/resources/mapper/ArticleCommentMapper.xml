@@ -18,7 +18,7 @@
             VALUE(#{commentId}, #{content}, #{authorId}, #{authorName}, #{repliedCommentId}, #{createdTimestamp})
     </insert>
 
-    <select id="getAllCommentsForArticle" resultMap="articleMapper" parameterType="java.lang.String">
+    <select id="getAllCommentsForArticle" resultMap="articleComment" parameterType="java.lang.String">
         SELECT *
         FROM ArticleComments
         WHERE article_id = #{articleId}
