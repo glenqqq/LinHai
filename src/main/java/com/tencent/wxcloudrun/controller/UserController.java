@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/api/user-management/{userId}")
-    ApiResponse getArticleById(@PathVariable String userId, @RequestHeader String openId) {
+    ApiResponse getArticleById(@PathVariable String userId, @RequestHeader("x-wx-openid") String openId) {
         logger.info(String.format("requesting user by id: %s", userId));
         if (OPEN_ID.equals(userId)) {
             User retrievedUser = userService.getUserByOpenId(openId);
