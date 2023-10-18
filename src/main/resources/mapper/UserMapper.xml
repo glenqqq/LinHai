@@ -17,7 +17,7 @@
     <select id="searchUserByUserName" resultMap="userMapper" parameterType="java.lang.String">
         SELECT *
         FROM Users
-        WHERE title like concat('%', #{target}, '%')
+        WHERE userName like concat('%', #{target}, '%')
     </select>
 
     <select id="getUserByUserId" resultMap="userMapper" parameterType="java.lang.String">
