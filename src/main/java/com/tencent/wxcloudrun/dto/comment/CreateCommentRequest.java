@@ -1,12 +1,9 @@
-package com.tencent.wxcloudrun.model;
+package com.tencent.wxcloudrun.dto.comment;
 
-
-import lombok.Builder;
 import lombok.Data;
 
-@Builder
 @Data
-public class ArticleComment {
+public class CreateCommentRequest {
     private String commentId;
     private String content;
     private String authorId;
