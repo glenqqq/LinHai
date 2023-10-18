@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     public User getUserByOpenId(String openId) {
         User retrievedUser =  mapper.getUserByOpenId(openId);
         logger.info("retrieved user: {}", retrievedUser);
-        return null;
+        return retrievedUser;
     }
 
     @Override
