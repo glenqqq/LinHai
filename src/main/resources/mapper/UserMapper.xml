@@ -26,6 +26,12 @@
         WHERE user_id = #{userId}
     </select>
 
+    <select id="getUserByOpenId" resultMap="userMapper" parameterType="java.lang.String">
+        SELECT *
+        FROM Users
+        WHERE open_id = #{openId}
+    </select>
+
     <insert id="createUser" parameterType="com.tencent.wxcloudrun.model.User">
         INSERT INTO `Users`(`user_id`, `open_id`, `user_name`, `profile_image_url`, `location`, `location_id`, `gender`, `longitude`, `latitude`)
             VALUE(#{userId}, #{openId}, #{userName}, #{profileImageUrl}, #{location}, #{locationId}, #{gender}, #{longitude}, #{latitude})

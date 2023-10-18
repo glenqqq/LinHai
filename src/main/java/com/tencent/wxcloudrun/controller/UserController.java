@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
+    static private final String OPEN_ID = "openId";
     final Logger logger;
     final UserService userService;
 
@@ -32,9 +33,15 @@ public class UserController {
     }
 
     @GetMapping(value = "/api/user-management/{userId}")
-    ApiResponse getArticleById(@PathVariable String userId) {
+    ApiResponse getArticleById(@PathVariable String userId, @RequestHeader String openId) {
         logger.info(String.format("requesting user by id: %s", userId));
+        if (OPEN_ID.equals(userId)) {
+            User retrievedUser = userService.getUserByOpenId(openId);
+            return ApiResponse.ok(retrievedUser);
+        }
+
         User retrievedUser = userService.getUserByUserId(userId);
+
         return ApiResponse.ok(retrievedUser);
     }
 

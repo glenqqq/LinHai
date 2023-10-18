@@ -11,5 +11,7 @@ public interface UserService {
 
     User getUserByUserId(String userId);
 
+    User getUserByOpenId(String openId);
+
     List<User> searchUserByUserName(String target);
 }

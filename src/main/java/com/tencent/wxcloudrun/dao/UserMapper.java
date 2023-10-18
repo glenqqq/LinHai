@@ -13,5 +13,10 @@ public interface UserMapper {
 
     User getUserByUserId(String userId);
 
+
+    User getUserByOpenId(String openId);
+
     List<User> searchUserByUserName(@Param("target") String target);
+
+
 }
