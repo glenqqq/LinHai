@@ -9,6 +9,7 @@
         <result property="authorName" column="author_name"/>
         <result property="repliedCommentId" column="replied_comment_id"/>
         <result property="createdTimestamp" column="created_timestamp"/>
+        <result property="articleId" column="article_id"/>
     </resultMap>
 
 
@@ -16,6 +17,12 @@
         INSERT INTO `ArticleComments`(`comment_id`, `content`, `author_id`, `author_name`, `replied_comment_id`, `created_timestamp`)
             VALUE(#{commentId}, #{content}, #{authorId}, #{authorName}, #{repliedCommentId}, #{createdTimestamp})
     </insert>
+
+    <select id="getAllCommentsForArticle" resultMap="articleMapper" parameterType="java.lang.String">
+        SELECT *
+        FROM ArticleComments
+        WHERE article_id = #{articleId}
+    </select>
 
 
 </mapper>

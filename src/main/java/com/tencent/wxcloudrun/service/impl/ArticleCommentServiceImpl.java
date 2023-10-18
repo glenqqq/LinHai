@@ -7,6 +7,7 @@ import com.tencent.wxcloudrun.service.ArticleCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -29,8 +30,14 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 .authorId(request.getAuthorId())
                 .repliedCommentId(request.getRepliedCommentId())
                 .createdTimestamp(System.currentTimeMillis())
+                .articleId(request.getArticleId())
                 .build();
         mapper.createArticleComment(articleComment);
         return commentId;
+    }
+
+    @Override
+    public List<ArticleComment> getAllCommentsForArticle(String articleId) {
+        return mapper.getAllCommentsForArticle(articleId);
     }
 }

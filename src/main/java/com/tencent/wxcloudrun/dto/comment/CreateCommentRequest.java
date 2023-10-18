@@ -9,5 +9,6 @@ public class CreateCommentRequest {
     private String authorId;
     private String authorName;
     private String repliedCommentId;
+    private String articleId;
     private Long createdTimestamp;
 }
