@@ -15,4 +15,6 @@ public class User {
     private String gender;
     private String longitude;
     private String latitude;
+    private Boolean isNameUpdated;
+    private String wechatId;
 }

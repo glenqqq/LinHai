@@ -12,6 +12,7 @@
         <result property="gender" column="gender"/>
         <result property="longitude" column="longitude"/>
         <result property="latitude" column="latitude"/>
+        <result property="wechatId" column="wechat_id"/>
     </resultMap>
 
     <select id="searchUserByUserName" resultMap="userMapper" parameterType="java.lang.String">
@@ -36,6 +37,13 @@
         INSERT INTO `Users`(`user_id`, `open_id`, `user_name`, `profile_image_url`, `location`, `location_id`, `gender`, `longitude`, `latitude`)
             VALUE(#{userId}, #{openId}, #{userName}, #{profileImageUrl}, #{location}, #{locationId}, #{gender}, #{longitude}, #{latitude})
     </insert>
+
+    <update id="updateUserInformation" parameterType="com.tencent.wxcloudrun.model.User">
+
+        UPDATE Users
+        SET user_name=#{userName}, location=#{location}, location_id=#{locationId}, gender=#{gender}, wechat_id=#{wechatId}, profile_image_url=#{profileImageUrl}
+        WHERE open_id=#{openId};
+    </update>
 
 
 </mapper>

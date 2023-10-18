@@ -3,6 +3,7 @@ package com.tencent.wxcloudrun.service.impl;
 import com.tencent.wxcloudrun.controller.UserController;
 import com.tencent.wxcloudrun.dao.UserMapper;
 import com.tencent.wxcloudrun.dto.user.CreateUserRequest;
+import com.tencent.wxcloudrun.dto.user.UpdateUserRequest;
 import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.service.UserService;
 import org.slf4j.Logger;
@@ -63,5 +64,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> searchUserByUserName(String target) {
         return mapper.searchUserByUserName(target);
+    }
+
+    @Override
+    public void updateUserInformation(UpdateUserRequest request) {
+        User updatedUser = User.builder()
+                .openId(request.getOpenId())
+                .userName(request.getUserName())
+                .location(request.getLocation())
+                .locationId(request.getLocationId())
+                .gender(request.getGender())
+                .wechatId(request.getWechatId())
+                .build();
+        mapper.updateUserInformation(updatedUser);
     }
 }

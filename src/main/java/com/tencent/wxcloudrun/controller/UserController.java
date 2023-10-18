@@ -3,6 +3,7 @@ package com.tencent.wxcloudrun.controller;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.dto.article.CreateArticleRequest;
 import com.tencent.wxcloudrun.dto.user.CreateUserRequest;
+import com.tencent.wxcloudrun.dto.user.UpdateUserRequest;
 import com.tencent.wxcloudrun.model.Article;
 import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.service.UserService;
@@ -50,5 +51,14 @@ public class UserController {
         logger.info(String.format("requesting search user by title: %s", target));
         List<User> retrievedUsers = userService.searchUserByUserName(target);
         return ApiResponse.ok(retrievedUsers);
+    }
+
+    @PostMapping(value = "/api/user-management/update-user")
+    ApiResponse updateUserInformation(@RequestBody UpdateUserRequest request, @RequestHeader("x-wx-openid") String openId) {
+
+        request.setOpenId(openId);
+        logger.info(String.format("updateUserInformation request: %s", request));
+        userService.updateUserInformation(request);
+        return ApiResponse.ok(openId);
     }
 }

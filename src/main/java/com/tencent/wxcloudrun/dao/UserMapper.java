@@ -18,5 +18,7 @@ public interface UserMapper {
 
     List<User> searchUserByUserName(@Param("target") String target);
 
+    void updateUserInformation(User user);
+
 
 }
