@@ -18,7 +18,7 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
 
-    static final private String DEFAULT_PROFILE_PIC_URL = "";
+    static final private String DEFAULT_PROFILE_PIC_URL = "https://7072-prod-1gq445ic39d0fffa-1318391868.tcb.qcloud.la/defaultHeaderImg.jpg";
 
     final UserMapper mapper;
 
