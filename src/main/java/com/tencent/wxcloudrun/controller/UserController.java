@@ -26,15 +26,16 @@ public class UserController {
     }
 
     @PostMapping(value = "/api/user-management/new-user")
-    ApiResponse createArticle(@RequestBody CreateUserRequest request) {
+    ApiResponse createUser(@RequestBody CreateUserRequest request, @RequestHeader("x-wx-openid") String openId) {
+        request.setOpenId(openId);
         logger.info("/api/user-management/new-user createUser request: {}", request);
-        final String userId = userService.createUser(request);
+        final User user = userService.createUser(request);
 
-        return ApiResponse.ok(userId);
+        return ApiResponse.ok(user);
     }
 
     @GetMapping(value = "/api/user-management/{userId}")
-    ApiResponse getArticleById(@PathVariable String userId, @RequestHeader("x-wx-openid") String openId) {
+    ApiResponse getUserById(@PathVariable String userId, @RequestHeader("x-wx-openid") String openId) {
         logger.info(String.format("requesting user by id: %s", userId));
         if (OPEN_ID.equals(userId)) {
             User retrievedUser = userService.getUserByOpenId(openId);

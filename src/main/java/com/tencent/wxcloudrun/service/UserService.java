@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface UserService {
-    String createUser(CreateUserRequest request);
+    User createUser(CreateUserRequest request);
 
     User getUserByUserId(String userId);
 

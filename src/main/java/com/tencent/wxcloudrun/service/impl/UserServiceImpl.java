@@ -18,6 +18,8 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
 
+    static final private String DEFAULT_PROFILE_PIC_URL = "";
+
     final UserMapper mapper;
 
     final Logger logger;
@@ -27,23 +29,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String createUser(CreateUserRequest request) {
+    public User createUser(CreateUserRequest request) {
         final String userId = UUID.randomUUID().toString();
         final String userName = "Linhai-"+ UUID.randomUUID();
         User newUser = User.builder()
                 .userId(userId)
                 .openId(request.getOpenId())
-                .locationId(request.getLocationId())
-                .location(request.getLocation())
                 .userName(userName)
-                .profileImageUrl(request.getProfileImageUrl())
-                .latitude(request.getLatitude())
-                .longitude(request.getLongitude())
-                .gender(request.getGender())
+                .profileImageUrl(DEFAULT_PROFILE_PIC_URL)
                 .build();
         logger.info("creating new user: {}", newUser);
         mapper.createUser(newUser);
-        return userName;
+        return newUser;
     }
 
     @Override
