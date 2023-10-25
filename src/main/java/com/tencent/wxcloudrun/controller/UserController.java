@@ -29,7 +29,7 @@ public class UserController {
     ApiResponse createUser(@RequestBody CreateUserRequest request, @RequestHeader("x-wx-openid") String openId) {
         request.setOpenId(openId);
         logger.info("/api/user-management/new-user createUser request: {}", request);
-        final User user = userService.createUser(request);
+        final User user = userService.createUser(openId);
 
         return ApiResponse.ok(user);
     }

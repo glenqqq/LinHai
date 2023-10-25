@@ -29,12 +29,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(CreateUserRequest request) {
+    public User createUser(String id) {
         final String userId = UUID.randomUUID().toString();
         final String userName = "Linhai-"+ UUID.randomUUID();
         User newUser = User.builder()
                 .userId(userId)
-                .openId(request.getOpenId())
+                .openId(id)
                 .userName(userName)
                 .profileImageUrl(DEFAULT_PROFILE_PIC_URL)
                 .build();
@@ -48,12 +48,18 @@ public class UserServiceImpl implements UserService {
 
         User retrievedUser =  mapper.getUserByUserId(userId);
         logger.info("retrieved user: {}", retrievedUser);
+        if (null == retrievedUser) {
+            retrievedUser = createUser(userId);
+        }
         return retrievedUser;
     }
 
     @Override
     public User getUserByOpenId(String openId) {
         User retrievedUser =  mapper.getUserByOpenId(openId);
+        if (null == retrievedUser) {
+            retrievedUser = createUser(openId);
+        }
         logger.info("retrieved user: {}", retrievedUser);
         return retrievedUser;
     }
