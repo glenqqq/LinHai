@@ -15,7 +15,7 @@
 
     <insert id="createArticleComment" parameterType="com.tencent.wxcloudrun.model.ArticleComment">
         INSERT INTO `ArticleComments`(`comment_id`, `content`, `author_id`, `author_name`, `replied_comment_id`, `created_timestamp`, `article_id`)
-            VALUE(#{commentId}, #{content}, #{authorId}, #{authorName}, #{repliedCommentId}, #{createdTimestamp}, #(articleId))
+            VALUE(#{commentId}, #{content}, #{authorId}, #{authorName}, #{repliedCommentId}, #{createdTimestamp}, #{articleId})
     </insert>
 
     <select id="getAllCommentsForArticle" resultMap="articleComment" parameterType="java.lang.String">
