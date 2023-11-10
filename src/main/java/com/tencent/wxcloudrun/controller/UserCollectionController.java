@@ -6,10 +6,12 @@ import com.tencent.wxcloudrun.dto.userCollection.CreateUserCollectionRequest;
 import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.model.UserCollection;
 import com.tencent.wxcloudrun.service.UserCollectionService;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 public class UserCollectionController {
@@ -17,9 +19,9 @@ public class UserCollectionController {
 
     final private Logger logger;
 
-    public UserCollectionController(UserCollectionService userCollectionService, Logger logger) {
+    public UserCollectionController(@Autowired UserCollectionService userCollectionService) {
         this.userCollectionService = userCollectionService;
-        this.logger = logger;
+        this.logger = LoggerFactory.getLogger(UserCollectionController.class);;
     }
 
     @PostMapping(value = "/api/user-collection-management/new-user-collection")
