@@ -43,16 +43,15 @@
     <select id="getAllSwitchWechatIdRequestByUserId" resultMap="switchWechatIdPair" parameterType="java.lang.String">
         SELECT *
         FROM SwtichWechatIds
-        WHERE user_id = #{requesterUserId} OR user_id = #{receiverUserId}
+        WHERE requester_user_id = #{requesterUserId} OR receiver_user_id = #{receiverUserId}
         ORDER by last_updated_timestamp
      </select>
 
-    <select id="getAllSwitchWechatIdRequest" resultMap="switchWechatIdPair" parameterType="java.lang.String">
-        SELECT *
-        FROM SwtichWechatIds
-        WHERE user_id = #{requesterUserId} OR user_id = #{receiverUserId}
-        ORDER by last_updated_timestamp
-    </select>
+    <update id="approveSwitchWechatIdRequest" parameterType="com.tencent.wxcloudrun.model.SwitchWechatIdPair">
+        UPDATE SwtichWechatIds
+        SET approving_status=#{approvingStatus}
+        WHERE requester_user_id = #{requesterUserId} AND receiver_user_id = #{receiverUserId}
+    </update>
 
     <update id="getSwitchInfoBy2Ids" parameterType="com.tencent.wxcloudrun.model.SwitchWechatIdPair">
         SELECT *
