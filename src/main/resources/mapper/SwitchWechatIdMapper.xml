@@ -29,7 +29,7 @@
     </resultMap>
 
     <insert id="createSwitchWechatIdRequest" parameterType="com.tencent.wxcloudrun.model.UserCollection">
-        INSERT INTO `UserCollections`(`requester_user_id`, `requester_user_name`, `requester_userProfile_url`, `requester_user_wechat_id`, `requester_user_location`, `requester_user_location_id`,
+        INSERT INTO `SwtichWechatIds`(`requester_user_id`, `requester_user_name`, `requester_userProfile_url`, `requester_user_wechat_id`, `requester_user_location`, `requester_user_location_id`,
                                       `receiver_user_id`, `receiver_user_name`, `receiver_user_profile_url`, `receiver_user_wechat_id`, `receiver_user_location`, `receiver_user_location_id`,
                                       `resource_article_id`, `resource_article_title`, `resource_article_first_pic_url`,
                                       `creation_timestamp`, `approve_timestamp`, `last_updated_timestamp`, `approving_status`)
@@ -42,21 +42,21 @@
 
     <select id="getAllSwitchWechatIdRequestByUserId" resultMap="userCollection" parameterType="java.lang.String">
         SELECT *
-        FROM UserCollections
+        FROM SwtichWechatIds
         WHERE user_id = #{requesterUserId} OR user_id = #{receiverUserId}
         ORDER by last_updated_timestamp
      </select>
 
     <select id="getAllSwitchWechatIdRequest" resultMap="userCollection" parameterType="java.lang.String">
         SELECT *
-        FROM UserCollections
+        FROM SwtichWechatIds
         WHERE user_id = #{requesterUserId} OR user_id = #{receiverUserId}
         ORDER by last_updated_timestamp
     </select>
 
     <update id="getSwitchInfoBy2Ids" parameterType="com.tencent.wxcloudrun.model.UserCollection">
         SELECT *
-        FROM UserCollections
+        FROM SwtichWechatIds
         WHERE requester_user_id = #{requesterUserId} AND receiver_user_id = #{receiverUserId}
     </update>
 
