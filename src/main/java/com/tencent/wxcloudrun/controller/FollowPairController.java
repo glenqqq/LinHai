@@ -27,12 +27,12 @@ public class FollowPairController {
         return ApiResponse.ok(followPairService.createFollowPair(request));
     }
 
-    @PostMapping(value = "/api/follow-pair-management/following-user/{userId}")
+    @GetMapping(value = "/api/follow-pair-management/following-user/{userId}")
     ApiResponse getMyFollowingUser(@PathVariable String userId) {
         return ApiResponse.ok(followPairService.getMyFollowingUser(userId));
     }
 
-    @PostMapping(value = "/api/follow-pair-management/followed-user/{userId}")
+    @GetMapping(value = "/api/follow-pair-management/followed-user/{userId}")
     ApiResponse getMyFollowedUser(@PathVariable String userId) {
         return ApiResponse.ok(followPairService.getMyFollowedUser(userId));
     }
