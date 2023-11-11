@@ -13,11 +13,11 @@ import java.util.List;
 @Service
 public class SwitchWechatIdServiceImpl implements SwitchWechatIdService {
 
-    static private final String APPROVE = "APPROVE";
+    static private final String APPROVED = "APPROVED";
 
     static private final String PENDING = "PENDING";
 
-    static private final String REJECT = "REJECT";
+    static private final String REJECTED = "REJECTED";
 
     private final SwitchWechatIdMapper mapper;
 
@@ -66,7 +66,7 @@ public class SwitchWechatIdServiceImpl implements SwitchWechatIdService {
         SwitchWechatIdPair pair = SwitchWechatIdPair.builder()
                 .requesterUserId(request.getRequesterUserId())
                 .receiverUserId(request.getReceiverUserId())
-                .approvingStatus(APPROVE)
+                .approvingStatus(APPROVED)
                 .build();
 
         mapper.approveSwitchWechatIdRequest(pair);

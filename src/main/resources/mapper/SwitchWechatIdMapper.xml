@@ -53,10 +53,10 @@
         WHERE requester_user_id = #{requesterUserId} AND receiver_user_id = #{receiverUserId}
     </update>
 
-    <update id="getSwitchInfoBy2Ids" parameterType="com.tencent.wxcloudrun.model.SwitchWechatIdPair">
+    <select id="getSwitchInfoBy2Ids" resultMap="switchWechatIdPair" parameterType="com.tencent.wxcloudrun.model.SwitchWechatIdPair">
         SELECT *
         FROM SwtichWechatIds
         WHERE requester_user_id = #{requesterUserId} AND receiver_user_id = #{receiverUserId}
-    </update>
+    </select>
 
 </mapper>
