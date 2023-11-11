@@ -31,7 +31,7 @@ public class SwitchWechatIdController {
         return ApiResponse.ok();
     }
 
-    @PostMapping(value = "/api/switch-wechat-management/get-all-switch-wechat-id/{userId}")
+    @GetMapping(value = "/api/switch-wechat-management/get-all-switch-wechat-id/{userId}")
     ApiResponse getAllSwitchWechatIdRequestByUserId(@PathVariable String userId) {
         return ApiResponse.ok(switchWechatIdService.getAllSwitchWechatIdRequestByUserId(userId));
     }

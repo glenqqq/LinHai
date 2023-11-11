@@ -35,7 +35,7 @@ public class SwitchWechatIdServiceImpl implements SwitchWechatIdService {
                 .receiverUserLocation(request.getReceiverUserLocation())
                 .receiverUserLocationId(request.getReceiverUserLocationId())
 
-                .receiverUserName(request.getReceiverUserName())
+                .receiverUserId(request.getReceiverUserId())
                 .receiverUserName(request.getReceiverUserName())
                 .receiverUserWechatId(request.getReceiverUserWechatId())
                 .receiverUserProfileUrl(request.getReceiverUserProfileUrl())
