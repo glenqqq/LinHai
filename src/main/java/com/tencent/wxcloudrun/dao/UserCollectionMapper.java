@@ -1,6 +1,5 @@
 package com.tencent.wxcloudrun.dao;
 
-import com.tencent.wxcloudrun.model.FollowPair;
 import com.tencent.wxcloudrun.model.UserCollection;
 import org.apache.ibatis.annotations.Mapper;
 

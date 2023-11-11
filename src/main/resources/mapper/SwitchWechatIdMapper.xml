@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tencent.wxcloudrun.dao.SwitchWechatIdMapper">
 
-    <resultMap id="switchWechatId" type="com.tencent.wxcloudrun.model.UserCollection">
+    <resultMap id="switchWechatIdPair" type="com.tencent.wxcloudrun.model.SwitchWechatIdPair">
         <id property="requesterUserId" column="requester_user_id"/>
         <result property="requesterUserName" column="requester_user_name"/>
         <result property="requesterUserProfileUrl" column="requester_userProfile_url"/>
@@ -28,7 +28,7 @@
         <result property="approvingStatus" column="approving_status"/>
     </resultMap>
 
-    <insert id="createSwitchWechatIdRequest" parameterType="com.tencent.wxcloudrun.model.UserCollection">
+    <insert id="createSwitchWechatIdRequest" parameterType="com.tencent.wxcloudrun.model.SwitchWechatIdPair">
         INSERT INTO `SwtichWechatIds`(`requester_user_id`, `requester_user_name`, `requester_userProfile_url`, `requester_user_wechat_id`, `requester_user_location`, `requester_user_location_id`,
                                       `receiver_user_id`, `receiver_user_name`, `receiver_user_profile_url`, `receiver_user_wechat_id`, `receiver_user_location`, `receiver_user_location_id`,
                                       `resource_article_id`, `resource_article_title`, `resource_article_first_pic_url`,
@@ -40,21 +40,21 @@
             #{creationTimestamp}, #{approveTimestamp}, #{lastUpdatedTimestamp}, #{approvingStatus})
     </insert>
 
-    <select id="getAllSwitchWechatIdRequestByUserId" resultMap="userCollection" parameterType="java.lang.String">
+    <select id="getAllSwitchWechatIdRequestByUserId" resultMap="switchWechatIdPair" parameterType="java.lang.String">
         SELECT *
         FROM SwtichWechatIds
         WHERE user_id = #{requesterUserId} OR user_id = #{receiverUserId}
         ORDER by last_updated_timestamp
      </select>
 
-    <select id="getAllSwitchWechatIdRequest" resultMap="userCollection" parameterType="java.lang.String">
+    <select id="getAllSwitchWechatIdRequest" resultMap="switchWechatIdPair" parameterType="java.lang.String">
         SELECT *
         FROM SwtichWechatIds
         WHERE user_id = #{requesterUserId} OR user_id = #{receiverUserId}
         ORDER by last_updated_timestamp
     </select>
 
-    <update id="getSwitchInfoBy2Ids" parameterType="com.tencent.wxcloudrun.model.UserCollection">
+    <update id="getSwitchInfoBy2Ids" parameterType="com.tencent.wxcloudrun.model.SwitchWechatIdPair">
         SELECT *
         FROM SwtichWechatIds
         WHERE requester_user_id = #{requesterUserId} AND receiver_user_id = #{receiverUserId}
