@@ -28,6 +28,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 .commentId(commentId)
                 .content(request.getContent())
                 .authorId(request.getAuthorId())
+                .authorProfileUrl(request.getAuthorProfileUrl())
                 .repliedCommentId(request.getRepliedCommentId())
                 .createdTimestamp(System.currentTimeMillis())
                 .articleId(request.getArticleId())

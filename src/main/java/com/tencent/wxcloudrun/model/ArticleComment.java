@@ -12,6 +12,7 @@ public class ArticleComment {
     private String authorId;
     private String authorName;
     private String repliedCommentId;
+    private String authorProfileUrl;
     private String articleId;
     private Long createdTimestamp;
 }
