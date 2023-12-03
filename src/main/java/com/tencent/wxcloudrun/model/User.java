@@ -1,10 +1,14 @@
 package com.tencent.wxcloudrun.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     private String openId;
     private String userId;
