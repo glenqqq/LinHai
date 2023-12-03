@@ -47,7 +47,11 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
             articleComment.setAuthorName(authorBasicInfo.getUserName());
             articleComment.setAuthorProfileUrl(authorBasicInfo.getProfileImageUrl());
             if (null != articleComment.getRepliedUserId()) {
-                articleComment.setRepliedUserName(this.userMapper.getBasicUserInfo(articleComment.getRepliedUserId()).getUserName());
+
+                User user = this.userMapper.getBasicUserInfo(articleComment.getRepliedUserId());
+                if (null != user) {
+                    articleComment.setRepliedUserName(user.getUserName());
+                }
             }
         });
         Map<String, List<ArticleComment>> repliedCommentIdToComments = new HashMap<>();
