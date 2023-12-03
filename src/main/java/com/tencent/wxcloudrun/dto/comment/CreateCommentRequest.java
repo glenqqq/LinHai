@@ -4,11 +4,9 @@ import lombok.Data;
 
 @Data
 public class CreateCommentRequest {
-    private String commentId;
     private String content;
     private String authorId;
-    private String authorName;
+    private String repliedUserId;
     private String repliedCommentId;
     private String articleId;
-    private String authorProfileUrl;
 }

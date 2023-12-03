@@ -16,6 +16,8 @@ public interface UserMapper {
 
     User getUserByOpenId(String openId);
 
+    User getBasicUserInfo(String userId);
+
     List<User> searchUserByUserName(@Param("target") String target);
 
     void updateUserInformation(User user);

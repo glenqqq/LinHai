@@ -1,22 +1,25 @@
 package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.dao.ArticleCommentMapper;
+import com.tencent.wxcloudrun.dao.UserMapper;
 import com.tencent.wxcloudrun.dto.comment.CreateCommentRequest;
 import com.tencent.wxcloudrun.model.ArticleComment;
+import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.service.ArticleCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class ArticleCommentServiceImpl implements ArticleCommentService {
 
     final ArticleCommentMapper mapper;
+    final UserMapper userMapper;
 
-    public ArticleCommentServiceImpl(@Autowired ArticleCommentMapper mapper) {
+    public ArticleCommentServiceImpl(@Autowired ArticleCommentMapper mapper, @Autowired UserMapper userMapper) {
         this.mapper = mapper;
+        this.userMapper = userMapper;
     }
 
 
@@ -28,7 +31,6 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 .commentId(commentId)
                 .content(request.getContent())
                 .authorId(request.getAuthorId())
-                .authorProfileUrl(request.getAuthorProfileUrl())
                 .repliedCommentId(request.getRepliedCommentId())
                 .createdTimestamp(System.currentTimeMillis())
                 .articleId(request.getArticleId())
@@ -39,6 +41,38 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 
     @Override
     public List<ArticleComment> getAllCommentsForArticle(String articleId) {
-        return mapper.getAllCommentsForArticle(articleId);
+        List<ArticleComment> retrievedComments = mapper.getAllCommentsForArticle(articleId);
+        retrievedComments.forEach(articleComment -> {
+            final User authorBasicInfo = this.userMapper.getBasicUserInfo(articleComment.getAuthorId());
+            articleComment.setAuthorName(authorBasicInfo.getUserName());
+            articleComment.setAuthorProfileUrl(authorBasicInfo.getProfileImageUrl());
+        });
+        Map<String, List<ArticleComment>> repliedCommentIdToComments = new HashMap<>();
+
+        collectSubComments(retrievedComments, repliedCommentIdToComments);
+
+        List<ArticleComment> formedComments = new ArrayList<>();
+        for (ArticleComment comment : retrievedComments) {
+            if (repliedCommentIdToComments.containsKey(comment.getRepliedCommentId())) {
+                comment.setSubComments(repliedCommentIdToComments.get(comment.getRepliedCommentId()));
+                formedComments.add(comment);
+            }
+        }
+
+
+
+        return formedComments;
+    }
+
+    private void collectSubComments(List<ArticleComment> comments, Map<String, List<ArticleComment>> repliedCommentIdToComments) {
+        for (ArticleComment comment : comments) {
+            if (!repliedCommentIdToComments.containsKey(comment.getRepliedCommentId())) {
+                repliedCommentIdToComments.put(comment.getRepliedCommentId(), new ArrayList<>());
+            }
+            repliedCommentIdToComments.get(comment.getRepliedCommentId()).add(comment);
+        }
+
+
+
     }
 }
