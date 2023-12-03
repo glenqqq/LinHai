@@ -46,6 +46,9 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
             final User authorBasicInfo = this.userMapper.getBasicUserInfo(articleComment.getAuthorId());
             articleComment.setAuthorName(authorBasicInfo.getUserName());
             articleComment.setAuthorProfileUrl(authorBasicInfo.getProfileImageUrl());
+            if (null != articleComment.getRepliedUserId()) {
+                articleComment.setRepliedUserName(this.userMapper.getBasicUserInfo(articleComment.getRepliedUserId()).getUserName());
+            }
         });
         Map<String, List<ArticleComment>> repliedCommentIdToComments = new HashMap<>();
 
@@ -58,9 +61,6 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 formedComments.add(comment);
             }
         }
-
-
-
         return formedComments;
     }
 
@@ -71,8 +71,5 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
             }
             repliedCommentIdToComments.get(comment.getRepliedCommentId()).add(comment);
         }
-
-
-
     }
 }

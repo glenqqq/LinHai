@@ -18,5 +18,6 @@ public class ArticleComment {
     private String articleId;
     private Long createdTimestamp;
     private String repliedUserId;
+    private String repliedUserName;
     private List<ArticleComment> subComments;
 }
