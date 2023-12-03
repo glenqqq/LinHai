@@ -2,7 +2,7 @@ package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.dto.comment.CreateCommentRequest;
-import com.tencent.wxcloudrun.model.ArticleComment;
+import com.tencent.wxcloudrun.model.comments.ArticleComment;
 import com.tencent.wxcloudrun.service.ArticleCommentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

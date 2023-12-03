@@ -1,7 +1,7 @@
 package com.tencent.wxcloudrun.service;
 
 import com.tencent.wxcloudrun.dto.comment.CreateCommentRequest;
-import com.tencent.wxcloudrun.model.ArticleComment;
+import com.tencent.wxcloudrun.model.comments.ArticleComment;
 
 import java.util.List;
 

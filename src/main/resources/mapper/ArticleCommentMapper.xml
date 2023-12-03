@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tencent.wxcloudrun.dao.ArticleCommentMapper">
 
-    <resultMap id="articleComment" type="com.tencent.wxcloudrun.model.ArticleComment">
+    <resultMap id="articleComment" type="com.tencent.wxcloudrun.model.comments.ArticleComment">
         <id property="commentId" column="comment_id"/>
         <result property="content" column="content"/>
         <result property="authorId" column="author_id"/>
@@ -13,7 +13,7 @@
     </resultMap>
 
 
-    <insert id="createArticleComment" parameterType="com.tencent.wxcloudrun.model.ArticleComment">
+    <insert id="createArticleComment" parameterType="com.tencent.wxcloudrun.model.comments.ArticleComment">
         INSERT INTO `ArticleComments`(`comment_id`, `content`, `author_id`, `replied_comment_id`, `replied_user_id`, `created_timestamp`, `article_id`)
             VALUE(#{commentId}, #{content}, #{authorId}, #{repliedCommentId}, #{repliedUserId}, #{createdTimestamp}, #{articleId})
     </insert>

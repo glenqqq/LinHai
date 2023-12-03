@@ -1,6 +1,6 @@
 package com.tencent.wxcloudrun.dao;
 
-import com.tencent.wxcloudrun.model.ArticleComment;
+import com.tencent.wxcloudrun.model.comments.ArticleComment;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

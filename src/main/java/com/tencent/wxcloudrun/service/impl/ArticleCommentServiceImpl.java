@@ -3,13 +3,15 @@ package com.tencent.wxcloudrun.service.impl;
 import com.tencent.wxcloudrun.dao.ArticleCommentMapper;
 import com.tencent.wxcloudrun.dao.UserMapper;
 import com.tencent.wxcloudrun.dto.comment.CreateCommentRequest;
-import com.tencent.wxcloudrun.model.ArticleComment;
+import com.tencent.wxcloudrun.model.comments.ArticleComment;
 import com.tencent.wxcloudrun.model.User;
+import com.tencent.wxcloudrun.model.comments.SubComments;
 import com.tencent.wxcloudrun.service.ArticleCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleCommentServiceImpl implements ArticleCommentService {
@@ -61,7 +63,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         List<ArticleComment> formedComments = new ArrayList<>();
         for (ArticleComment comment : retrievedComments) {
             if (repliedCommentIdToComments.containsKey(comment.getRepliedCommentId())) {
-                comment.setSubComments(repliedCommentIdToComments.get(comment.getRepliedCommentId()));
+                comment.setSubComments(repliedCommentIdToComments.get(comment.getRepliedCommentId()).stream().map(SubComments::new).collect(Collectors.toList()));
                 formedComments.add(comment);
             }
         }
