@@ -4,7 +4,6 @@ import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
 @AllArgsConstructor
 public class SubComments extends ArticleComment{
     public SubComments(ArticleComment articleComment) {
