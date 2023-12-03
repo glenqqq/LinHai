@@ -34,7 +34,7 @@
     </select>
 
     <select id="getBasicUserInfo" resultMap="userMapper" parameterType="java.lang.String">
-        SELECT `userName`, `profileImageUrl`
+        SELECT `user_name`, `profile_image_url`
         FROM Users
         WHERE user_id = #{userId}
     </select>
