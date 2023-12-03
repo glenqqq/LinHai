@@ -6,8 +6,6 @@
         <id property="commentId" column="comment_id"/>
         <result property="content" column="content"/>
         <result property="authorId" column="author_id"/>
-        <result property="authorProfileUrl" column="author_profile_url"/>
-        <result property="authorName" column="author_name"/>
         <result property="repliedCommentId" column="replied_comment_id"/>
         <result property="repliedUserId" column="replied_user_id"/>
         <result property="createdTimestamp" column="created_timestamp"/>
@@ -16,8 +14,8 @@
 
 
     <insert id="createArticleComment" parameterType="com.tencent.wxcloudrun.model.ArticleComment">
-        INSERT INTO `ArticleComments`(`comment_id`, `content`, `author_id`, `author_profile_url`, `author_name`, `replied_comment_id`, `replied_user_id`, `created_timestamp`, `article_id`)
-            VALUE(#{commentId}, #{content}, #{authorId}, #{authorProfileUrl}, #{authorName}, #{repliedCommentId}, #{repliedUserId}, #{createdTimestamp}, #{articleId})
+        INSERT INTO `ArticleComments`(`comment_id`, `content`, `author_id`, `replied_comment_id`, `replied_user_id`, `created_timestamp`, `article_id`)
+            VALUE(#{commentId}, #{content}, #{authorId}, #{repliedCommentId}, #{repliedUserId}, #{createdTimestamp}, #{articleId})
     </insert>
 
     <select id="getAllCommentsForArticle" resultMap="articleComment" parameterType="java.lang.String">
