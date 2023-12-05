@@ -17,6 +17,7 @@ public interface UserMapper {
     User getUserByOpenId(String openId);
 
     User getBasicUserInfo(String userId);
+    List<String> getAllUserId();
 
     List<User> searchUserByUserName(@Param("target") String target);
 

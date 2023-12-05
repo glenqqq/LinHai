@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserMessageService {
     List<UserMessage> getMyUserMessage(String userId);
+
+    void createSystemMessageForArticle(String article);
 }

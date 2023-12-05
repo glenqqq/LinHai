@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @Slf4j
@@ -44,5 +45,18 @@ public class UserMessageServiceImpl implements UserMessageService {
                     ));
         }
         return retrievedUserMessage;
+    }
+
+    @Override
+    public void createSystemMessageForArticle(String articleId) {
+        List<String> allUserIds = userMapper.getAllUserId();
+        for (String userId : allUserIds) {
+            UserMessage userMessage = UserMessage
+                    .builder()
+                    .receiverUserId(userId)
+                    .articleId(articleId)
+                    .build();
+            userMessageMapper.createUserMessage(userMessage);
+        }
     }
 }

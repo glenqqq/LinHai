@@ -8,9 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class UserMessageController {
         this.logger = LoggerFactory.getLogger(UserMessageController.class);
     }
 
-    @GetMapping(value = "/api/user-message-management/{userId}")
+    @GetMapping(value = "/api/user-message-management/all-message-for-user/{userId}")
     ApiResponse getUserMessageById(@PathVariable String userId) {
 
         logger.info(String.format("requesting user message by id: %s", userId));
@@ -34,4 +32,13 @@ public class UserMessageController {
         return ApiResponse.ok(userMessages);
     }
 
+    @PostMapping(value = "/api/user-message-management/system-message/{articleId}")
+    ApiResponse createSystemMessage(@PathVariable String articleId) {
+
+        logger.info(String.format("create system message for article : %s", articleId));
+
+        userMessageService.getMyUserMessage(articleId);
+
+        return ApiResponse.ok();
+    }
 }
