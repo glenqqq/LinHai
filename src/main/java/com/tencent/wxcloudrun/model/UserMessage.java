@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserMessage {
+    private String messageId;
     private String receiverUserId;
     // 1. FOLLOW
     // 2. REPLY
@@ -20,5 +21,6 @@ public class UserMessage {
     private String articleId;
     private User commentingUser;
     private Article article;
+    private Long createTimestamp;
 
 }

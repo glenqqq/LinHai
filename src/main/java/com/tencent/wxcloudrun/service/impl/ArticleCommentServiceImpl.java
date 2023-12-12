@@ -35,6 +35,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
     @Override
     public String createArticleComment(CreateCommentRequest request) {
         final String commentId = UUID.randomUUID().toString();
+        final String userMessageId = UUID.randomUUID().toString();
         ArticleComment articleComment = ArticleComment
                 .builder()
                 .commentId(commentId)
@@ -45,11 +46,13 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 .articleId(request.getArticleId())
                 .build();
         UserMessage userMessage = UserMessage.builder()
+                .messageId(userMessageId)
                 .receiverUserId(request.getArticleAuthorId())
                 .requestingUserId(request.getAuthorId())
                 .articleId(request.getArticleId())
                 .messageType("REPLY")
                 .isMessageRead(false)
+                .createTimestamp(System.currentTimeMillis())
                 .build();
         mapper.createArticleComment(articleComment);
         userMessageMapper.createUserMessage(userMessage);

@@ -27,6 +27,7 @@ public class FollowPairServiceImpl implements FollowPairService {
     @Override
     public String createFollowPair(CreateFollowPairRequest createFollowPairRequest) {
         final String followId = UUID.randomUUID().toString();
+        final String userMessageId = UUID.randomUUID().toString();
         FollowPair pair = FollowPair.builder()
                 .followId(followId)
                 .followedUserId(createFollowPairRequest.getFollowedUserId())
@@ -37,9 +38,11 @@ public class FollowPairServiceImpl implements FollowPairService {
                 .followingUserProfileUrl(createFollowPairRequest.getFollowingUserProfileUrl())
                 .build();
         UserMessage userMessage = UserMessage.builder()
+                .messageId(userMessageId)
                 .receiverUserId(createFollowPairRequest.getFollowedUserId())
                 .requestingUserId(createFollowPairRequest.getFollowingUserId())
                 .isMessageRead(false)
+                .createTimestamp(System.currentTimeMillis())
                 .messageType("FOLLOW")
                 .build();
         mapper.createFollowPair(pair);
