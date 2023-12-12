@@ -38,7 +38,7 @@ public class FollowPairServiceImpl implements FollowPairService {
                 .build();
         UserMessage userMessage = UserMessage.builder()
                 .receiverUserId(createFollowPairRequest.getFollowedUserId())
-                .commentingUserId(createFollowPairRequest.getFollowingUserId())
+                .requestingUserId(createFollowPairRequest.getFollowingUserId())
                 .isMessageRead(false)
                 .messageType("FOLLOW")
                 .build();

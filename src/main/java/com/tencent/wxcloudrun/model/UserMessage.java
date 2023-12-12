@@ -16,7 +16,7 @@ public class UserMessage {
     // 3. SYSTEM
     private String messageType;
     private Boolean isMessageRead;
-    private String commentingUserId;
+    private String requestingUserId;
     private String articleId;
     private User commentingUser;
     private Article article;

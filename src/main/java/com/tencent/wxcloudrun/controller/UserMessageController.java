@@ -1,18 +1,16 @@
 package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
-import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.model.UserMessage;
 import com.tencent.wxcloudrun.service.UserMessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class UserMessageController {
     final Logger logger;
     final UserMessageService userMessageService;
