@@ -41,7 +41,7 @@ public class UserMessageServiceImpl implements UserMessageService {
 
             userMessage.setCommentingUser(
                     userMapper.getUserByUserId(
-                            userMessage.getCommentingUserId()
+                            userMessage.getRequestingUserId()
                     ));
         }
         return retrievedUserMessage;
