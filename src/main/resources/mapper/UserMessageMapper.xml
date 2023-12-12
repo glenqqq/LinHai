@@ -3,7 +3,8 @@
 <mapper namespace="com.tencent.wxcloudrun.dao.UserMessageMapper">
 
     <resultMap id="userMessage" type="com.tencent.wxcloudrun.model.UserMessage">
-        <id property="userId" column="user_id"/>
+        <id property="messageId" column="message_id"/>
+        <result property="userId" column="user_id"/>
         <result property="messageType" column="message_type"/>
         <result property="isMessageRead" column="is_message_read"/>
         <result property="articleId" column="article_id"/>
@@ -11,8 +12,8 @@
     </resultMap>
 
     <insert id="createUserMessage" parameterType="com.tencent.wxcloudrun.model.UserMessage">
-        INSERT INTO `UserMessages`(`user_id`, `message_type`, `is_message_read`, `article_id`, `commenting_user_id`)
-            VALUE(#{userId}, #{messageType}, #{isMessageRead}, #{articleId}, #{commentingUserId})
+        INSERT INTO `UserMessages`(`message_id`, `user_id`, `message_type`, `is_message_read`, `article_id`, `commenting_user_id`)
+            VALUE(#{messageId}, #{userId}, #{messageType}, #{isMessageRead}, #{articleId}, #{commentingUserId})
     </insert>
 
     <select id="getMyUserMessage" resultMap="userMessage" parameterType="java.lang.String">
