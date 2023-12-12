@@ -12,4 +12,5 @@ public class CreateCommentRequest {
     private String repliedUserId;//二级评论不需要，三级评论需要
     private String repliedCommentId;//二级评论和三级评论需要
     private String articleId;
+    private String articleAuthorId;
 }

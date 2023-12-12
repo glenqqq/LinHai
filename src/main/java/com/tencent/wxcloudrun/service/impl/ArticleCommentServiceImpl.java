@@ -2,7 +2,10 @@ package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.dao.ArticleCommentMapper;
 import com.tencent.wxcloudrun.dao.UserMapper;
+import com.tencent.wxcloudrun.dao.UserMessageMapper;
 import com.tencent.wxcloudrun.dto.comment.CreateCommentRequest;
+import com.tencent.wxcloudrun.model.Article;
+import com.tencent.wxcloudrun.model.UserMessage;
 import com.tencent.wxcloudrun.model.comments.ArticleComment;
 import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.model.comments.SubComments;
@@ -18,9 +21,13 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 
     final ArticleCommentMapper mapper;
     final UserMapper userMapper;
+    final UserMessageMapper userMessageMapper;
 
-    public ArticleCommentServiceImpl(@Autowired ArticleCommentMapper mapper, @Autowired UserMapper userMapper) {
+    public ArticleCommentServiceImpl(@Autowired ArticleCommentMapper mapper,
+                                     @Autowired UserMapper userMapper,
+                                     @Autowired UserMessageMapper userMessageMapper) {
         this.mapper = mapper;
+        this.userMessageMapper = userMessageMapper;
         this.userMapper = userMapper;
     }
 
@@ -37,7 +44,15 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 .createdTimestamp(System.currentTimeMillis())
                 .articleId(request.getArticleId())
                 .build();
+        UserMessage userMessage = UserMessage.builder()
+                .receiverUserId(request.getArticleAuthorId())
+                .requestingUserId(request.getAuthorId())
+                .articleId(request.getArticleId())
+                .messageType("REPLY")
+                .isMessageRead(false)
+                .build();
         mapper.createArticleComment(articleComment);
+        userMessageMapper.createUserMessage(userMessage);
         return commentId;
     }
 
