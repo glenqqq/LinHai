@@ -1,17 +1,14 @@
 package com.tencent.wxcloudrun.service.impl;
 
-import com.sun.tools.javac.comp.Todo;
 import com.tencent.wxcloudrun.dao.ArticleCommentMapper;
 import com.tencent.wxcloudrun.dao.UserMapper;
 import com.tencent.wxcloudrun.dao.UserMessageMapper;
 import com.tencent.wxcloudrun.dto.comment.CreateCommentRequest;
-import com.tencent.wxcloudrun.model.Article;
 import com.tencent.wxcloudrun.model.UserMessage;
 import com.tencent.wxcloudrun.model.comments.ArticleComment;
 import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.model.comments.SubComments;
 import com.tencent.wxcloudrun.service.ArticleCommentService;
-import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +16,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@Log4j
 public class ArticleCommentServiceImpl implements ArticleCommentService {
 
     final ArticleCommentMapper mapper;
