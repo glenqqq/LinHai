@@ -78,6 +78,7 @@ public class UserServiceImpl implements UserService {
                 .locationId(request.getLocationId())
                 .gender(request.getGender())
                 .wechatId(request.getWechatId())
+                .profileImageUrl(request.getProfileImageUrl())
                 .build();
         mapper.updateUserInformation(updatedUser);
     }
