@@ -71,7 +71,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         Map<String, List<SubComments>> repliedCommentIdToComments = new HashMap<>();
 
         for (ArticleComment articleComment : retrievedComments) {
-            repliedCommentIdToComments.put(articleComment.getArticleId(), new ArrayList<>());
+            repliedCommentIdToComments.put(articleComment.getCommentId(), new ArrayList<>());
         }
 
         for (SubComments subComment : subComments) {
