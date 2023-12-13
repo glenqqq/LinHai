@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.service.impl;
 
+import com.sun.tools.javac.comp.Todo;
 import com.tencent.wxcloudrun.dao.ArticleCommentMapper;
 import com.tencent.wxcloudrun.dao.UserMapper;
 import com.tencent.wxcloudrun.dao.UserMessageMapper;
@@ -10,6 +11,7 @@ import com.tencent.wxcloudrun.model.comments.ArticleComment;
 import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.model.comments.SubComments;
 import com.tencent.wxcloudrun.service.ArticleCommentService;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Log4j
 public class ArticleCommentServiceImpl implements ArticleCommentService {
 
     final ArticleCommentMapper mapper;
@@ -61,39 +64,48 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 
     @Override
     public List<ArticleComment> getAllCommentsForArticle(String articleId) {
-        List<ArticleComment> retrievedComments = mapper.getAllCommentsForArticle(articleId);
-        retrievedComments.forEach(articleComment -> {
-            final User authorBasicInfo = this.userMapper.getBasicUserInfo(articleComment.getAuthorId());
-            articleComment.setAuthorName(authorBasicInfo.getUserName());
-            articleComment.setAuthorProfileUrl(authorBasicInfo.getProfileImageUrl());
-            if (null != articleComment.getRepliedUserId()) {
+        List<ArticleComment> retrievedComments = mapper.getFirstLevelCommentsForArticle(articleId);
+        List<SubComments> subComments = mapper.getSubCommentsForArticle(articleId)
+                .stream()
+                .map(SubComments::new)
+                .collect(Collectors.toList());
+        getUserInfoForComments(retrievedComments);
+        getUserInfoForComments(subComments);
 
-                User user = this.userMapper.getBasicUserInfo(articleComment.getRepliedUserId());
-                if (null != user) {
-                    articleComment.setRepliedUserName(user.getUserName());
-                }
+        Map<String, List<SubComments>> repliedCommentIdToComments = new HashMap<>();
+
+        for (ArticleComment articleComment : retrievedComments) {
+            repliedCommentIdToComments.put(articleComment.getArticleId(), new ArrayList<>());
+        }
+
+        for (SubComments subComment : subComments) {
+            if (repliedCommentIdToComments.containsKey(subComment.getRepliedCommentId())) {
+                repliedCommentIdToComments.get(subComment.getRepliedCommentId()).add(subComment);
             }
-        });
-        Map<String, List<ArticleComment>> repliedCommentIdToComments = new HashMap<>();
-
-        collectSubComments(retrievedComments, repliedCommentIdToComments);
+            //TODO: add else warning
+        }
 
         List<ArticleComment> formedComments = new ArrayList<>();
         for (ArticleComment comment : retrievedComments) {
-            if (repliedCommentIdToComments.containsKey(comment.getRepliedCommentId())) {
-                comment.setSubComments(repliedCommentIdToComments.get(comment.getRepliedCommentId()).stream().map(SubComments::new).collect(Collectors.toList()));
+            if (repliedCommentIdToComments.containsKey(comment.getCommentId())) {
+                comment.setSubComments(repliedCommentIdToComments.get(comment.getCommentId()));
                 formedComments.add(comment);
             }
         }
         return formedComments;
     }
 
-    private void collectSubComments(List<ArticleComment> comments, Map<String, List<ArticleComment>> repliedCommentIdToComments) {
+    private void getUserInfoForComments(List<? extends ArticleComment> comments) {
         for (ArticleComment comment : comments) {
-            if (!repliedCommentIdToComments.containsKey(comment.getRepliedCommentId())) {
-                repliedCommentIdToComments.put(comment.getRepliedCommentId(), new ArrayList<>());
+            final User authorBasicInfo = this.userMapper.getBasicUserInfo(comment.getAuthorId());
+            if (null == authorBasicInfo) {continue;} //TODO:log warning
+            comment.setAuthorName(authorBasicInfo.getUserName());
+            comment.setAuthorProfileUrl(authorBasicInfo.getProfileImageUrl());
+            if (null != comment.getRepliedUserId()) {
+                User user = this.userMapper.getBasicUserInfo(comment.getRepliedUserId());
+                if (null == user) {continue;} //TODO:log warning
+                comment.setRepliedUserName(user.getUserName());
             }
-            repliedCommentIdToComments.get(comment.getRepliedCommentId()).add(comment);
         }
     }
 }

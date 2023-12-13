@@ -18,10 +18,18 @@
             VALUE(#{commentId}, #{content}, #{authorId}, #{repliedCommentId}, #{repliedUserId}, #{createdTimestamp}, #{articleId})
     </insert>
 
-    <select id="getAllCommentsForArticle" resultMap="articleComment" parameterType="java.lang.String">
+    <select id="getFirstLevelCommentsForArticle" resultMap="articleComment" parameterType="java.lang.String">
         SELECT *
         FROM ArticleComments
         WHERE article_id = #{articleId}
+        AND repliedCommentId NOT EXISTS
+    </select>
+
+    <select id="getSubCommentsForArticle" resultMap="articleComment" parameterType="java.lang.String">
+        SELECT *
+        FROM ArticleComments
+        WHERE article_id = #{articleId}
+        AND repliedCommentId EXISTS
     </select>
 
 

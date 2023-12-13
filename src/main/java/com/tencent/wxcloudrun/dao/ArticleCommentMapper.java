@@ -10,5 +10,6 @@ import java.util.List;
 public interface ArticleCommentMapper {
     void createArticleComment(ArticleComment articleComment);
 
-    List<ArticleComment> getAllCommentsForArticle(@Param("articleId") String articleId);
+    List<ArticleComment> getFirstLevelCommentsForArticle(@Param("articleId") String articleId);
+    List<ArticleComment> getSubCommentsForArticle(@Param("articleId") String articleId);
 }
