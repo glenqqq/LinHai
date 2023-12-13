@@ -22,14 +22,14 @@
         SELECT *
         FROM ArticleComments
         WHERE article_id = #{articleId}
-        AND replied_comment_id NOT EXISTS
+        AND replied_comment_id IS NULL
     </select>
 
     <select id="getSubCommentsForArticle" resultMap="articleComment" parameterType="java.lang.String">
         SELECT *
         FROM ArticleComments
         WHERE article_id = #{articleId}
-        AND replied_comment_id EXISTS
+        AND replied_comment_id IS NOT NULL
     </select>
 
 
