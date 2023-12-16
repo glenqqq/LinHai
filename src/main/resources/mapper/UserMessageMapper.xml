@@ -21,7 +21,7 @@
     <select id="getMyUserMessage" resultMap="userMessage" parameterType="java.lang.String">
         SELECT *
         FROM UserMessages
-        WHERE user_id = #{userId}
+        WHERE receiver_user_id = #{receiverUserId}
     </select>
 
 </mapper>
