@@ -44,7 +44,8 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 .createdTimestamp(System.currentTimeMillis())
                 .articleId(request.getArticleId())
                 .build();
-        UserMessage userMessage = UserMessage.builder()
+        mapper.createArticleComment(articleComment);
+        UserMessage articleAuthorMessage = UserMessage.builder()
                 .messageId(userMessageId)
                 .receiverUserId(request.getArticleAuthorId())
                 .requestingUserId(request.getAuthorId())
@@ -53,8 +54,20 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 .isMessageRead(false)
                 .createTimestamp(System.currentTimeMillis())
                 .build();
-        mapper.createArticleComment(articleComment);
-        userMessageMapper.createUserMessage(userMessage);
+        userMessageMapper.createUserMessage(articleAuthorMessage);
+
+        if (null != request.getRepliedUserId()) {
+            UserMessage levelOneCommentMessage = UserMessage.builder()
+                    .messageId(userMessageId)
+                    .receiverUserId(request.getRepliedUserId())
+                    .requestingUserId(request.getAuthorId())
+                    .articleId(request.getArticleId())
+                    .messageType("REPLY")
+                    .isMessageRead(false)
+                    .createTimestamp(System.currentTimeMillis())
+                    .build();
+            userMessageMapper.createUserMessage(levelOneCommentMessage);
+        }
         return commentId;
     }
 
