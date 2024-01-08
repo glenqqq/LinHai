@@ -9,13 +9,16 @@ public class SubComments extends ArticleComment{
     public SubComments(ArticleComment articleComment) {
         this.commentId = articleComment.getCommentId();
         this.content = articleComment.getContent();
-        this.authorName = articleComment.getAuthorName();
-        this.articleId = articleComment.getArticleId();
-        this.repliedCommentId = articleComment.getRepliedCommentId();
-        this.authorProfileUrl = articleComment.getAuthorProfileUrl();
-        this.createdTimestamp = articleComment.getCreatedTimestamp();
-        this.repliedUserId = articleComment.getRepliedUserId();
         this.authorId = articleComment.getAuthorId();
-        this.repliedUserName = articleComment.getRepliedUserName();
+        this.authorName = articleComment.getAuthorName();
+        this.authorProfileUrl = articleComment.getAuthorProfileUrl();
+        this.articleId = articleComment.getArticleId();
+        this.articleAuthorId = articleComment.getArticleAuthorId();
+        this.createdTimestamp = articleComment.getCreatedTimestamp();
+        this.rootCommentId = articleComment.getRootCommentId();
+        this.rootCommentAuthorId = articleComment.getRootCommentAuthorId();
+        this.leaveCommentId = articleComment.getLeaveCommentId();
+        this.leaveCommentAuthorId = articleComment.getLeaveCommentAuthorId();
+        this.leaveCommentAuthorName = articleComment.getLeaveCommentAuthorName();
     }
 }
