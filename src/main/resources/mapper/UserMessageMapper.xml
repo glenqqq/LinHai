@@ -26,7 +26,7 @@
 
     <update id="readMessage" parameterType="java.lang.String">
         UPDATE UserMessages
-        SET is_message_read = true}
+        SET is_message_read = true
         WHERE message_id=#{messageId};
     </update>
 
