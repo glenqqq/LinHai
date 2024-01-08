@@ -6,30 +6,35 @@
         <id property="commentId" column="comment_id"/>
         <result property="content" column="content"/>
         <result property="authorId" column="author_id"/>
-        <result property="repliedCommentId" column="replied_comment_id"/>
-        <result property="repliedUserId" column="replied_user_id"/>
-        <result property="createdTimestamp" column="created_timestamp"/>
         <result property="articleId" column="article_id"/>
+        <result property="articleAuthorId" column="article_author_id"/>
+        <result property="createdTimestamp" column="created_timestamp"/>
+        <result property="rootCommentId" column="root_comment_id"/>
+        <result property="rootCommentAuthorId" column="root_comment_author_id"/>
+
+        <result property="leaveCommentId" column="leave_comment_id"/>
+        <result property="leaveCommentAuthorId" column="leave_comment_author_id"/>
+
     </resultMap>
 
 
     <insert id="createArticleComment" parameterType="com.tencent.wxcloudrun.model.comments.ArticleComment">
-        INSERT INTO `ArticleComments`(`comment_id`, `content`, `author_id`, `replied_comment_id`, `replied_user_id`, `created_timestamp`, `article_id`)
-            VALUE(#{commentId}, #{content}, #{authorId}, #{repliedCommentId}, #{repliedUserId}, #{createdTimestamp}, #{articleId})
+        INSERT INTO `ArticleComments`(`comment_id`, `content`, `author_id`, `article_id`, `article_author_id`, `created_timestamp`, `root_comment_id`, `root_comment_author_id`, `leave_comment_id`, `leave_comment_author_id`)
+            VALUE(#{commentId}, #{content}, #{authorId}, #{articleId}, #{articleAuthorId}, #{createdTimestamp}, #{rootCommentId}, #{rootCommentAuthorId}, #{leaveCommentId}, #{leaveCommentAuthorId})
     </insert>
 
     <select id="getFirstLevelCommentsForArticle" resultMap="articleComment" parameterType="java.lang.String">
         SELECT *
         FROM ArticleComments
         WHERE article_id = #{articleId}
-        AND replied_comment_id IS NULL
+        AND root_comment_id IS NULL
     </select>
 
     <select id="getSubCommentsForArticle" resultMap="articleComment" parameterType="java.lang.String">
         SELECT *
         FROM ArticleComments
         WHERE article_id = #{articleId}
-        AND replied_comment_id IS NOT NULL
+        AND root_comment_id IS NOT NULL
     </select>
 
 

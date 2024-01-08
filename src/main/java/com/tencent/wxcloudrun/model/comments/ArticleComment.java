@@ -17,11 +17,14 @@ public class ArticleComment {
     protected String content;
     protected String authorId;
     protected String authorName;
-    protected String repliedCommentId;
     protected String authorProfileUrl;
     protected String articleId;
+    protected String articleAuthorId;
     protected Long createdTimestamp;
-    protected String repliedUserId;
-    protected String repliedUserName;
+    protected String rootCommentId; // 一级评论id, 二级三级评论都需要
+    protected String rootCommentAuthorId; // 一级评论作者id, 二级三级评论都需要
+    protected String leaveCommentId; // 二级评论id, 三级评论需要， 二级评论不需要
+    protected String leaveCommentAuthorId; //二级评论作者id, 三级评论需要， 二级评论不需要
+    protected String leaveCommentAuthorName; //二级评论作者id, 三级评论需要， 二级评论不需要
     private List<SubComments> subComments;
 }

@@ -9,8 +9,12 @@ public class CreateCommentRequest {
 
     private String content;
     private String authorId;
-    private String repliedUserId;//二级评论不需要，三级评论需要
-    private String repliedCommentId;//二级评论和三级评论需要
+
     private String articleId;
     private String articleAuthorId;
+
+    private String rootCommentId; // 一级评论id, 二级三级评论都需要, 一级评论不需要
+    private String rootCommentAuthorId; // 一级评论作者id, 二级三级评论都需要, 一级评论不需要
+    private String leaveCommentId; // 二级评论id, 三级评论需要， 一级 二级评论不需要
+    private String leaveCommentAuthorId; //二级评论作者id, 三级评论需要， 一级 二级评论不需要
 }

@@ -40,9 +40,13 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 .commentId(commentId)
                 .content(request.getContent())
                 .authorId(request.getAuthorId())
-                .repliedCommentId(request.getRepliedCommentId())
-                .createdTimestamp(System.currentTimeMillis())
                 .articleId(request.getArticleId())
+                .articleAuthorId(request.getArticleAuthorId())
+                .rootCommentId(request.getRootCommentId())
+                .rootCommentAuthorId(request.getRootCommentAuthorId())
+                .leaveCommentId(request.getLeaveCommentId())
+                .leaveCommentAuthorId(request.getLeaveCommentAuthorId())
+                .createdTimestamp(System.currentTimeMillis())
                 .build();
         mapper.createArticleComment(articleComment);
         UserMessage articleAuthorMessage = UserMessage.builder()
@@ -56,10 +60,23 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 .build();
         userMessageMapper.createUserMessage(articleAuthorMessage);
 
-        if (null != request.getRepliedUserId()) {
+        if (null != request.getRootCommentId()) {
             UserMessage levelOneCommentMessage = UserMessage.builder()
                     .messageId(userMessageId)
-                    .receiverUserId(request.getRepliedUserId())
+                    .receiverUserId(request.getRootCommentId())
+                    .requestingUserId(request.getAuthorId())
+                    .articleId(request.getArticleId())
+                    .messageType("REPLY")
+                    .isMessageRead(false)
+                    .createTimestamp(System.currentTimeMillis())
+                    .build();
+            userMessageMapper.createUserMessage(levelOneCommentMessage);
+        }
+
+        if (null != request.getLeaveCommentId()) {
+            UserMessage levelOneCommentMessage = UserMessage.builder()
+                    .messageId(userMessageId)
+                    .receiverUserId(request.getLeaveCommentId())
                     .requestingUserId(request.getAuthorId())
                     .articleId(request.getArticleId())
                     .messageType("REPLY")
@@ -88,8 +105,8 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         }
 
         for (SubComments subComment : subComments) {
-            if (repliedCommentIdToComments.containsKey(subComment.getRepliedCommentId())) {
-                repliedCommentIdToComments.get(subComment.getRepliedCommentId()).add(subComment);
+            if (repliedCommentIdToComments.containsKey(subComment.getRootCommentId())) {
+                repliedCommentIdToComments.get(subComment.getRootCommentId()).add(subComment);
             }
             //TODO: add else warning
         }
@@ -110,10 +127,10 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
             if (null == authorBasicInfo) {continue;} //TODO:log warning
             comment.setAuthorName(authorBasicInfo.getUserName());
             comment.setAuthorProfileUrl(authorBasicInfo.getProfileImageUrl());
-            if (null != comment.getRepliedUserId()) {
-                User user = this.userMapper.getBasicUserInfo(comment.getRepliedUserId());
+            if (null != comment.getLeaveCommentId()) {
+                User user = this.userMapper.getBasicUserInfo(comment.getLeaveCommentId());
                 if (null == user) {continue;} //TODO:log warning
-                comment.setRepliedUserName(user.getUserName());
+                comment.setLeaveCommentAuthorName(user.getUserName());
             }
         }
     }
