@@ -24,4 +24,10 @@
         WHERE receiver_user_id = #{receiverUserId}
     </select>
 
+    <update id="readMessage" parameterType="java.lang.String">
+        UPDATE UserMessages
+        SET is_message_read = true}
+        WHERE message_id=#{messageId};
+    </update>
+
 </mapper>

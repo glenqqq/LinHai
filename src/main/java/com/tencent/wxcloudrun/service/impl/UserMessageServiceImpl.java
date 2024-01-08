@@ -59,4 +59,10 @@ public class UserMessageServiceImpl implements UserMessageService {
             userMessageMapper.createUserMessage(userMessage);
         }
     }
+
+    @Override
+    public void readMessage(String messageId) {
+        log.info("read message: {}", messageId);
+        userMessageMapper.readMessage(messageId);
+    }
 }

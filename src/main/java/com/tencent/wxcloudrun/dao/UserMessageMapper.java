@@ -8,4 +8,5 @@ import java.util.List;
 public interface UserMessageMapper {
     List<UserMessage> getMyUserMessage(String userId);
     void createUserMessage(UserMessage userMessage);
+    void readMessage(String messageId);
 }

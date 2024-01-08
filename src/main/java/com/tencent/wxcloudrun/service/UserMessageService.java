@@ -8,4 +8,6 @@ public interface UserMessageService {
     List<UserMessage> getMyUserMessage(String userId);
 
     void createSystemMessageForArticle(String article);
+
+    void readMessage(String messageId);
 }

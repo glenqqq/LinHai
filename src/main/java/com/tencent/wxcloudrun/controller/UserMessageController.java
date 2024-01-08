@@ -39,4 +39,14 @@ public class UserMessageController {
 
         return ApiResponse.ok();
     }
+
+    @PostMapping(value = "/api/user-message-management/message-read/{messageId}")
+    ApiResponse readMessage(@PathVariable String messageId) {
+
+        logger.info(String.format("read message : %s", messageId));
+
+        userMessageService.readMessage(messageId);
+
+        return ApiResponse.ok();
+    }
 }
