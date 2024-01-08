@@ -54,4 +54,18 @@ public class ArticleController {
         List<Article> retrievedArticle = articleSerice.getRecentTenArticles();
         return ApiResponse.ok(retrievedArticle);
     }
+
+    @PostMapping(value = "/api/article-management/hide-article")
+    ApiResponse hideArticle(@RequestBody String articleId) {
+        logger.info(String.format("hide article: %s", articleId));
+        articleSerice.hideArticle(articleId);
+        return ApiResponse.ok();
+    }
+
+    @PostMapping(value = "/api/article-management/show-article")
+    ApiResponse showArticle(@RequestBody String articleId) {
+        logger.info(String.format("show article: %s", articleId));
+        articleSerice.showArticle(articleId);
+        return ApiResponse.ok();
+    }
 }

@@ -61,4 +61,14 @@ public class ArticleServiceImpl implements ArticleSerice {
     public List<Article> getRecentTenArticles() {
         return mapper.getRecentTenArticles();
     }
+
+    @Override
+    public void hideArticle(String articleId) {
+        mapper.hideArticle(articleId);
+    }
+
+    @Override
+    public void showArticle(String articleId) {
+        mapper.showArticle(articleId);
+    }
 }

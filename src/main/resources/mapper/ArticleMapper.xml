@@ -23,6 +23,7 @@
         <result property="viewCount" column="view_count"/>
         <result property="colCount" column="col_count"/>
         <result property="isStickTop" column="is_stick_top"/>
+        <result property="isHidden" column="is_hidden"/>
         <result property="images" column="images"/>
     </resultMap>
 
@@ -48,5 +49,17 @@
         FROM Articles
         ORDER BY articleId DESC limit 10 OFFSET 0
     </select>
+
+    <update id="hideArticle" parameterType="java.lang.String">
+        UPDATE Articles
+        SET is_hidden = true
+        WHERE article_id=#{articleId};
+    </update>
+
+    <update id="showArticle" parameterType="java.lang.String">
+        UPDATE Articles
+        SET is_hidden = false
+        WHERE article_id=#{articleId};
+    </update>
 
 </mapper>
