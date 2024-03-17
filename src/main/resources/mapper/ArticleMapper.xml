@@ -42,7 +42,7 @@
     <select id="getArticleByUserId" resultMap="articleMapper" parameterType="java.lang.String">
         SELECT *
         FROM Articles
-        WHERE authorId = #{author_id}
+        WHERE author_id = #{authorId}
     </select>
 
     <insert id="createArticle" parameterType="com.tencent.wxcloudrun.model.Article">
