@@ -14,6 +14,7 @@ public interface ArticleSerice {
     List<Article> searchArticleByTitle(String target);
 
     List<Article> getRecentTenArticles();
+    List<Article> getArticleByUserId(String authorId);
     void hideArticle(String articleId);
     void showArticle(String articleId);
 }

@@ -15,6 +15,7 @@ public interface ArticleMapper {
     List<Article> searchArticleByTitle(@Param("target") String target);
 
     List<Article> getRecentTenArticles();
+    List<Article> getArticleByUserId(String authorId);
 
     void hideArticle(String articleId);
     void showArticle(String articleId);

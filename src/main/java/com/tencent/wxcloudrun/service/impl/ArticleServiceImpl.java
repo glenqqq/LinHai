@@ -7,6 +7,7 @@ import com.tencent.wxcloudrun.service.ArticleSerice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,13 +54,20 @@ public class ArticleServiceImpl implements ArticleSerice {
     }
 
     @Override
+    public List<Article> getArticleByUserId(String userId) {
+        return mapper.getArticleByUserId(userId);
+    }
+
+    @Override
     public List<Article> searchArticleByTitle(String target) {
         return mapper.searchArticleByTitle(target);
     }
 
     @Override
     public List<Article> getRecentTenArticles() {
-        return mapper.getRecentTenArticles();
+        List<Article> retrievedArticle = mapper.getRecentTenArticles();
+        Collections.shuffle(retrievedArticle);
+        return retrievedArticle;
     }
 
     @Override

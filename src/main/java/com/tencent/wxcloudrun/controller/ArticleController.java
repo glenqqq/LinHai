@@ -55,6 +55,13 @@ public class ArticleController {
         return ApiResponse.ok(retrievedArticle);
     }
 
+    @GetMapping(value = "/api/article-management/by-user-id/{userId}")
+    ApiResponse getArticleByUserId(@PathVariable String userId) {
+        logger.info(String.format("get articles for user id %s", userId));
+        List<Article> retrievedArticle = articleSerice.getArticleByUserId(userId);
+        return ApiResponse.ok(retrievedArticle);
+    }
+
     @PostMapping(value = "/api/article-management/hide-article")
     ApiResponse hideArticle(@RequestBody String articleId) {
         logger.info(String.format("hide article: %s", articleId));
