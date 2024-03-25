@@ -24,7 +24,7 @@
         <result property="colCount" column="col_count"/>
         <result property="isStickTop" column="is_stick_top"/>
         <result property="isHidden" column="is_hidden"/>
-        <result property="images" column="images"/>
+        <result property="images" column="images" javaType="java.lang.String"/>
         <result property="authorProfileUrl" column="author_profile_url"/>
     </resultMap>
 
