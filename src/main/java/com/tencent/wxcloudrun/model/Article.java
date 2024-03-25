@@ -34,4 +34,5 @@ public class Article {
     private Long colCount;
     private Boolean isStickTop;
     private String images;
+    private Boolean isHidden;
 }
