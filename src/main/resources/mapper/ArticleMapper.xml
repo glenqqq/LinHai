@@ -25,6 +25,7 @@
         <result property="isStickTop" column="is_stick_top"/>
         <result property="isHidden" column="is_hidden"/>
         <result property="images" column="images"/>
+        <result property="authorProfileUrl" column="author_profile_url"/>
     </resultMap>
 
     <select id="searchArticleByTitle" resultMap="articleMapper" parameterType="java.lang.String">

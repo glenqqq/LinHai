@@ -14,12 +14,10 @@ public class CreateArticleRequest {
     private Double price;
     private Boolean isDeliveryCovered;
     private Integer deliveryMethod;
-    private String authorProfileUrl;
     private String location;
     private Boolean isNeedHelp;
     private Long createTimestamp;
     private Long updateTimestamp;
-    private String authorName;
     private String authorId;
     private BigDecimal latitude;
     private BigDecimal longitude;
