@@ -1,10 +1,8 @@
 package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.dao.ArticleMapper;
-import com.tencent.wxcloudrun.dao.UserMapper;
 import com.tencent.wxcloudrun.dto.article.CreateArticleRequest;
 import com.tencent.wxcloudrun.model.Article;
-import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.service.ArticleSerice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +14,9 @@ import java.util.UUID;
 @Service
 public class ArticleServiceImpl implements ArticleSerice {
     final ArticleMapper mapper;
-    final UserMapper userMapper;
 
-    public ArticleServiceImpl(@Autowired ArticleMapper mapper,
-                              @Autowired UserMapper userMapper) {
+    public ArticleServiceImpl(@Autowired ArticleMapper mapper) {
         this.mapper = mapper;
-        this.userMapper = userMapper;
     }
 
     @Override
@@ -40,6 +35,7 @@ public class ArticleServiceImpl implements ArticleSerice {
                 .isNeedHelp(request.getIsNeedHelp())
                 .createTimestamp(request.getCreateTimestamp())
                 .updateTimestamp(request.getUpdateTimestamp())
+                .authorName(request.getAuthorName())
                 .authorId(request.getAuthorId())
                 .latitude(request.getLatitude())
                 .longitude(request.getLongitude())
@@ -54,11 +50,7 @@ public class ArticleServiceImpl implements ArticleSerice {
 
     @Override
     public Article getArticleById(String articleId) {
-        Article retrievedArticle = mapper.getArticleById(articleId);
-        User articleAuthor = userMapper.getBasicUserInfo(retrievedArticle.getAuthorId());
-        retrievedArticle.setAuthorProfileUrl(articleAuthor.getProfileImageUrl());
-        retrievedArticle.setAuthorName(articleAuthor.getUserName());
-        return retrievedArticle;
+        return mapper.getArticleById(articleId);
     }
 
     @Override

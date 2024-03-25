@@ -25,7 +25,7 @@ public class Article {
     private Long updateTimestamp;
     private String authorName;
     private String authorId;
-    private String authorProfileUrl;
+
     private BigDecimal latitude;
     private BigDecimal longitude;
 
