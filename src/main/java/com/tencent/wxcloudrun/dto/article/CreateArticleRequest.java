@@ -14,6 +14,7 @@ public class CreateArticleRequest {
     private Double price;
     private Boolean isDeliveryCovered;
     private Integer deliveryMethod;
+    private String authorProfileUrl;
     private String location;
     private Boolean isNeedHelp;
     private Long createTimestamp;
