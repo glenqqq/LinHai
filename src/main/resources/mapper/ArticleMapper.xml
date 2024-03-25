@@ -47,8 +47,8 @@
     </select>
 
     <insert id="createArticle" parameterType="com.tencent.wxcloudrun.model.Article">
-        INSERT INTO `Articles`(`articleId`, `title`, `article_type`, `merchant_category`, `content`, `price`, `is_delivery_covered`, `delivery_method`, `location`, `is_need_help`, `create_timestamp`, `update_timestamp`, `author_name`, `author_id`, `latitude`, `longitude`, `like_count`,`view_count`, `col_count`, `is_stick_top`, `images`)
-            VALUE(#{articleId}, #{title}, #{articleType}, #{merchantCategory}, #{content}, #{price}, #{isDeliveryCovered}, #{deliveryMethod}, #{location}, #{isNeedHelp}, #{createTimestamp}, #{updateTimestamp}, #{authorName}, #{authorId}, #{latitude}, #{longitude}, #{likeCount}, #{viewCount}, #{colCount}, #{isStickTop}, #{images})
+        INSERT INTO `Articles`(`articleId`, `title`, `article_type`, `merchant_category`, `content`, `price`, `is_delivery_covered`, `delivery_method`, `location`, `is_need_help`, `create_timestamp`, `update_timestamp`, `author_id`, `latitude`, `longitude`, `like_count`,`view_count`, `col_count`, `is_stick_top`, `images`)
+            VALUE(#{articleId}, #{title}, #{articleType}, #{merchantCategory}, #{content}, #{price}, #{isDeliveryCovered}, #{deliveryMethod}, #{location}, #{isNeedHelp}, #{createTimestamp}, #{updateTimestamp}, #{authorId}, #{latitude}, #{longitude}, #{likeCount}, #{viewCount}, #{colCount}, #{isStickTop}, #{images})
     </insert>
 
     <select id="getRecentTenArticles" resultMap="articleMapper">
