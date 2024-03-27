@@ -33,16 +33,17 @@ public class UserMessageServiceImpl implements UserMessageService {
     public List<UserMessage> getMyUserMessage(String userId) {
         List<UserMessage> retrievedUserMessage = userMessageMapper.getMyUserMessage(userId);
         for (UserMessage userMessage : retrievedUserMessage) {
-            userMessage.setArticle(
-                    articleMapper.getArticleById(
-                            userMessage.getArticleId(
-
-                            )));
-
-            userMessage.setCommentingUser(
-                    userMapper.getUserByUserId(
-                            userMessage.getRequestingUserId()
-                    ));
+            if (null != userMessage.getArticleId()) {
+                userMessage.setArticle(
+                        articleMapper.getArticleById(
+                                userMessage.getArticleId()
+                        ));
+            } else if (null != userMessage.getRequestingUserId()) {
+                userMessage.setCommentingUser(
+                        userMapper.getUserByUserId(
+                                userMessage.getRequestingUserId()
+                        ));
+            }
         }
         return retrievedUserMessage;
     }
