@@ -17,6 +17,13 @@
             VALUE(#{followId}, #{followedUserId}, #{followedUserName}, #{followedUserProfileUrl}, #{followingUserId}, #{followingUserName}, #{followingUserProfileUrl})
     </insert>
 
+    <select id="getByUserIds" resultMap="followPair" parameterType="com.tencent.wxcloudrun.model.FollowPair">
+        SELECT *
+        FROM FollowPairs
+        WHERE following_user_id = #{followingUserId}
+        AND followed_user_id = #{followedUserId}
+    </select>
+
     <select id="getMyFollowingUser" resultMap="followPair" parameterType="java.lang.String">
         SELECT *
         FROM FollowPairs

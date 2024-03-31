@@ -8,4 +8,6 @@ import java.util.List;
 public interface UserCollectionMapper {
     void createUserCollection(UserCollection userCollection);
     List<UserCollection> getMyCollectionList(String userId);
+
+    UserCollection getByUserIdAndArticleId(UserCollection userCollection);
 }

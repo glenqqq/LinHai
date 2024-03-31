@@ -2,6 +2,7 @@ package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.dto.followPair.CreateFollowPairRequest;
+import com.tencent.wxcloudrun.model.FollowPair;
 import com.tencent.wxcloudrun.service.FollowPairService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,5 +32,10 @@ public class FollowPairController {
     @GetMapping(value = "/api/follow-pair-management/followed-user/{userId}")
     ApiResponse getMyFollowedUser(@PathVariable String userId) {
         return ApiResponse.ok(followPairService.getMyFollowedUser(userId));
+    }
+
+    @GetMapping(value = "/api/followed-user/{followedUser}/following-user/{followingUser}")
+    ApiResponse checkIfUserFollowed(@PathVariable String followedUser, @PathVariable String followingUser) {
+        return ApiResponse.ok(followPairService.checkIfUserFollowed(followedUser, followingUser));
     }
 }

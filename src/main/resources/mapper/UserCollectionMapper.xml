@@ -21,4 +21,11 @@
         WHERE user_id = #{userId}
     </select>
 
+    <select id="getByUserIdAndArticleId" resultMap="userCollection" parameterType="com.tencent.wxcloudrun.model.UserCollection">
+        SELECT *
+        FROM UserCollections
+        WHERE user_id = #{userId}
+        AND article_id = #{articleId}
+    </select>
+
 </mapper>

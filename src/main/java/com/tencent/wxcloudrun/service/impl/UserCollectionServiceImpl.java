@@ -31,6 +31,17 @@ public class UserCollectionServiceImpl implements UserCollectionService {
     }
 
     @Override
+    public Boolean checkIfCollected(String userId, String articleId) {
+        UserCollection userCollection = mapper.getByUserIdAndArticleId(
+                UserCollection.builder()
+                        .userId(userId)
+                        .articleId(articleId)
+                        .build()
+        );
+        return null != userCollection;
+    }
+
+    @Override
     public List<UserCollection> getMyArticleCollections(String userId) {
         return mapper.getMyCollectionList(userId);
     }

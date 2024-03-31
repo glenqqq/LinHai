@@ -9,4 +9,6 @@ public interface FollowMapper {
     void createFollowPair(FollowPair followPair);
     List<FollowPair> getMyFollowingUser(String userId);
     List<FollowPair> getMyFollowedUser(String userId);
+
+    FollowPair getByUserIds(FollowPair followPair);
 }

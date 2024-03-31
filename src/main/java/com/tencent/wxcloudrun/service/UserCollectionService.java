@@ -8,4 +8,6 @@ import java.util.List;
 public interface UserCollectionService {
     void createUserCollection(CreateUserCollectionRequest createUserCollectionRequest);
     List<UserCollection> getMyArticleCollections(String userId);
+
+    Boolean checkIfCollected(String userId, String articleId);
 }

@@ -51,6 +51,17 @@ public class FollowPairServiceImpl implements FollowPairService {
     }
 
     @Override
+    public Boolean checkIfUserFollowed(String followedUserId, String followingUserId) {
+        FollowPair followPair = mapper.getByUserIds(
+                FollowPair.builder()
+                        .followedUserId(followedUserId)
+                        .followingUserName(followingUserId)
+                        .build()
+        );
+        return null != followPair;
+    }
+
+    @Override
     public List<FollowPair> getMyFollowingUser(String userId) {
         return mapper.getMyFollowingUser(userId);
     }
