@@ -79,6 +79,16 @@ public class ArticleServiceImpl implements ArticleSerice {
     }
 
     @Override
+    public Integer getArticleNumByUserId(String userId) {
+        List<Article> retrievedArticles = mapper.getArticleByUserId(userId);
+        if (null == retrievedArticles) {
+            return 0;
+        } else {
+            return retrievedArticles.size();
+        }
+    }
+
+    @Override
     public void hideArticle(String articleId) {
         mapper.hideArticle(articleId);
     }

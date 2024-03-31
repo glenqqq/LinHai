@@ -39,4 +39,9 @@ public class FollowPairController {
         logger.info(String.format("check follow pair for followed user id: %s, following user id: %s", followedUser, followingUser));
         return ApiResponse.ok(followPairService.checkIfUserFollowed(followedUser, followingUser));
     }
+
+    @GetMapping(value = "/api/follow-pair-management/followed-user-num/{userId}")
+    ApiResponse getMyFollowedUserNum(@PathVariable String userId) {
+        return ApiResponse.ok(followPairService.getMyFollowedUserNum(userId));
+    }
 }

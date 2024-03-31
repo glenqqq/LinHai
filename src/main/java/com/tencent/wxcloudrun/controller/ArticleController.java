@@ -75,4 +75,10 @@ public class ArticleController {
         articleSerice.showArticle(articleId);
         return ApiResponse.ok();
     }
+
+    @GetMapping(value = "/api/article-management/num-by-user-id/{userId}")
+    ApiResponse getArticleNumByUserId(@PathVariable String userId) {
+        logger.info(String.format("get articles number for user id %s", userId));
+        return ApiResponse.ok(articleSerice.getArticleNumByUserId(userId));
+    }
 }
