@@ -55,7 +55,7 @@ public class FollowPairServiceImpl implements FollowPairService {
         FollowPair followPair = mapper.getByUserIds(
                 FollowPair.builder()
                         .followedUserId(followedUserId)
-                        .followingUserName(followingUserId)
+                        .followingUserId(followingUserId)
                         .build()
         );
         return null != followPair;
