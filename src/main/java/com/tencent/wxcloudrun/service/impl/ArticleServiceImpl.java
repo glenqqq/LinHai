@@ -6,6 +6,7 @@ import com.tencent.wxcloudrun.dto.article.CreateArticleRequest;
 import com.tencent.wxcloudrun.model.Article;
 import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.service.ArticleSerice;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class ArticleServiceImpl implements ArticleSerice {
     final ArticleMapper mapper;
     final UserMapper userMapper;
@@ -91,10 +93,6 @@ public class ArticleServiceImpl implements ArticleSerice {
 
     @Override
     public void hideArticle(String articleId) {
-        Article retrievedArticle = mapper.getArticleById(articleId);
-        if (null == retrievedArticle) {
-            throw new InvalidParameterException(String.format("article does not exist: %s", articleId));
-        }
 
         mapper.hideArticle(articleId);
     }

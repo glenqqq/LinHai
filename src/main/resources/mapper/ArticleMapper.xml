@@ -58,13 +58,13 @@
 
     <update id="hideArticle" parameterType="java.lang.String">
         UPDATE Articles
-        SET is_hidden = true
+        SET is_hidden = TRUE
         WHERE articleId=#{articleId};
     </update>
 
     <update id="showArticle" parameterType="java.lang.String">
         UPDATE Articles
-        SET is_hidden = false
+        SET is_hidden = FALSE
         WHERE articleId=#{articleId};
     </update>
 
