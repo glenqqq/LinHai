@@ -2,6 +2,7 @@ package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.dto.article.CreateArticleRequest;
+import com.tencent.wxcloudrun.dto.article.IsHiddenRequest;
 import com.tencent.wxcloudrun.model.Article;
 import com.tencent.wxcloudrun.service.ArticleSerice;
 import org.slf4j.Logger;
@@ -63,16 +64,16 @@ public class ArticleController {
     }
 
     @PostMapping(value = "/api/article-management/hide-article")
-    ApiResponse hideArticle(@RequestBody String articleId) {
-        logger.info(String.format("hide article: %s", articleId));
-        articleSerice.hideArticle(articleId);
+    ApiResponse hideArticle(@RequestBody IsHiddenRequest request) {
+        logger.info(String.format("hide article: %s", request.getArticleId()));
+        articleSerice.hideArticle(request.getArticleId());
         return ApiResponse.ok();
     }
 
     @PostMapping(value = "/api/article-management/show-article")
-    ApiResponse showArticle(@RequestBody String articleId) {
-        logger.info(String.format("show article: %s", articleId));
-        articleSerice.showArticle(articleId);
+    ApiResponse showArticle(@RequestBody IsHiddenRequest request) {
+        logger.info(String.format("show article: %s", request.getArticleId()));
+        articleSerice.showArticle(request.getArticleId());
         return ApiResponse.ok();
     }
 

@@ -1,11 +1,15 @@
 package com.tencent.wxcloudrun.dto.article;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CreateArticleRequest {
     private String title;
     private Integer articleType;
