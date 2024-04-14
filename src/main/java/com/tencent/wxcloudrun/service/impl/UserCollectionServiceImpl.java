@@ -20,6 +20,9 @@ public class UserCollectionServiceImpl implements UserCollectionService {
 
     @Override
     public void createUserCollection(CreateUserCollectionRequest createUserCollectionRequest) {
+        if (checkIfCollected(createUserCollectionRequest.getUserId(), createUserCollectionRequest.getArticleId())) {
+            throw new IllegalArgumentException("this article has been collected by the user");
+        }
         UserCollection userCollection = UserCollection.builder()
                 .userId(createUserCollectionRequest.getUserId())
                 .articleId(createUserCollectionRequest.getArticleId())
