@@ -26,6 +26,11 @@ public class FollowPairServiceImpl implements FollowPairService {
 
     @Override
     public String createFollowPair(CreateFollowPairRequest createFollowPairRequest) {
+        if (checkIfUserFollowed(
+                createFollowPairRequest.getFollowedUserId(),
+                createFollowPairRequest.getFollowingUserId())) {
+            throw new IllegalArgumentException("pair already exists");
+        }
         final String followId = UUID.randomUUID().toString();
         final String userMessageId = UUID.randomUUID().toString();
         FollowPair pair = FollowPair.builder()
