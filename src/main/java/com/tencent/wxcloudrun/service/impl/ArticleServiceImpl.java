@@ -9,6 +9,7 @@ import com.tencent.wxcloudrun.service.ArticleSerice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.InvalidParameterException;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -90,6 +91,11 @@ public class ArticleServiceImpl implements ArticleSerice {
 
     @Override
     public void hideArticle(String articleId) {
+        Article retrievedArticle = mapper.getArticleById(articleId);
+        if (null == retrievedArticle) {
+            throw new InvalidParameterException(String.format("article does not exist: %s", articleId));
+        }
+
         mapper.hideArticle(articleId);
     }
 

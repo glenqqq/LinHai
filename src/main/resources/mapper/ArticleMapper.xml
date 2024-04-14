@@ -59,13 +59,13 @@
     <update id="hideArticle" parameterType="java.lang.String">
         UPDATE Articles
         SET is_hidden = true
-        WHERE article_id=#{articleId};
+        WHERE articleId=#{articleId};
     </update>
 
     <update id="showArticle" parameterType="java.lang.String">
         UPDATE Articles
         SET is_hidden = false
-        WHERE article_id=#{articleId};
+        WHERE articleId=#{articleId};
     </update>
 
 </mapper>
