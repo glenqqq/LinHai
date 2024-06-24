@@ -56,6 +56,16 @@ public class FollowPairServiceImpl implements FollowPairService {
     }
 
     @Override
+    public String deleteFollowPair(CreateFollowPairRequest createFollowPairRequest) {
+        FollowPair pair = FollowPair.builder()
+                .followedUserId(createFollowPairRequest.getFollowedUserId())
+                .followingUserId(createFollowPairRequest.getFollowingUserId())
+                .build();
+        mapper.deleteFollowPair(pair);
+        return null;
+    }
+
+    @Override
     public Integer getMyFollowedUserNum(String userId) {
         List<FollowPair> retrievedFollowed = mapper.getMyFollowedUser(userId);
         if (null == retrievedFollowed) {

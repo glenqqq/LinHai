@@ -7,6 +7,7 @@ import java.util.List;
 @Mapper
 public interface FollowMapper {
     void createFollowPair(FollowPair followPair);
+    void deleteFollowPair(FollowPair followPair);
     List<FollowPair> getMyFollowingUser(String userId);
     List<FollowPair> getMyFollowedUser(String userId);
 

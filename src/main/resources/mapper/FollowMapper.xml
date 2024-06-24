@@ -17,6 +17,10 @@
             VALUE(#{followId}, #{followedUserId}, #{followedUserName}, #{followedUserProfileUrl}, #{followingUserId}, #{followingUserName}, #{followingUserProfileUrl})
     </insert>
 
+    <delete id="deleteFollowPair" parameterType="com.tencent.wxcloudrun.model.FollowPair">
+        delete from `FollowPairs` where `followed_user_id` = #{followedUserId} and `following_user_id` = #{followingUserId}
+    </delete>
+
     <select id="getByUserIds" resultMap="followPair" parameterType="com.tencent.wxcloudrun.model.FollowPair">
         SELECT *
         FROM FollowPairs

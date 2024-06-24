@@ -24,6 +24,12 @@ public class FollowPairController {
         return ApiResponse.ok(followPairService.createFollowPair(request));
     }
 
+    //取关
+    @PostMapping(value = "/api/follow-pair-management/delete-follow-pair")
+    ApiResponse deleteFollowPair(@RequestBody CreateFollowPairRequest request) {
+        return ApiResponse.ok(followPairService.deleteFollowPair(request));
+    }
+
     @GetMapping(value = "/api/follow-pair-management/following-user/{userId}")
     ApiResponse getMyFollowingUser(@PathVariable String userId) {
         return ApiResponse.ok(followPairService.getMyFollowingUser(userId));
