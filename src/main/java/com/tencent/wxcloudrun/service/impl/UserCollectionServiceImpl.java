@@ -1,6 +1,5 @@
 package com.tencent.wxcloudrun.service.impl;
 
-import com.tencent.wxcloudrun.dao.FollowMapper;
 import com.tencent.wxcloudrun.dao.UserCollectionMapper;
 import com.tencent.wxcloudrun.dto.userCollection.CreateUserCollectionRequest;
 import com.tencent.wxcloudrun.model.UserCollection;
@@ -34,6 +33,17 @@ public class UserCollectionServiceImpl implements UserCollectionService {
     }
 
     @Override
+    public int deleteUserCollection(String userId, String articleId) {
+        int i = mapper.deleteUserCollection(
+                UserCollection.builder()
+                        .userId(userId)
+                        .articleId(articleId)
+                        .build()
+        );
+        return i;
+    }
+
+    @Override
     public Boolean checkIfCollected(String userId, String articleId) {
         UserCollection userCollection = mapper.getByUserIdAndArticleId(
                 UserCollection.builder()
@@ -46,6 +56,11 @@ public class UserCollectionServiceImpl implements UserCollectionService {
 
     @Override
     public List<UserCollection> getMyArticleCollections(String userId) {
+        return mapper.getMyCollectionList(userId);
+    }
+
+    @Override
+    public List<UserCollection> getMyArticleCollectionsByAriticleId(String userId) {
         return mapper.getMyCollectionList(userId);
     }
 }

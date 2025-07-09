@@ -16,4 +16,16 @@ public class FollowPair {
     private String followingUserName;
     private String followingUserProfileUrl;
 
+    @Override
+    public String toString() {
+        return "FollowPair{" +
+                "followId='" + followId + '\'' +
+                ", followedUserId='" + followedUserId + '\'' +
+                ", followedUserName='" + followedUserName + '\'' +
+                ", followedUserProfileUrl='" + followedUserProfileUrl + '\'' +
+                ", followingUserId='" + followingUserId + '\'' +
+                ", followingUserName='" + followingUserName + '\'' +
+                ", followingUserProfileUrl='" + followingUserProfileUrl + '\'' +
+                '}';
+    }
 }

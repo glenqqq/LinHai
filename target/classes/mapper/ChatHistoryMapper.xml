@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.ChatHistoryMapper">
+
+    <resultMap id="chatMap" type="com.tencent.wxcloudrun.model.ChatRecode">
+        <id property="id" column="id"/>
+        <result property="sendedUserId" column="sendedUserId"/>
+        <result property="userid" column="userid"/>
+        <result property="contents" column="contents"/>
+        <result property="applyTime" column="applyTime"/>
+        <result property="isread" column="isread"/>
+    </resultMap>
+
+    <select id="searchChatByUserId" resultMap="chatMap" parameterType="com.tencent.wxcloudrun.model.ChatRecode">
+        SELECT *
+        FROM chatHistory
+        WHERE (userid = #{userid} and sendedUserId = #{sendedUserId})
+              or (userid = #{sendedUserId} and sendedUserId = #{userid})
+    </select>
+
+    <select id="searchChatListByUserId" resultMap="chatMap" parameterType="com.tencent.wxcloudrun.model.ChatRecode">
+        SELECT *
+        FROM chatHistory
+        WHERE userid = #{userid} and sendedUserId = #{sendedUserId} and isread = 0
+    </select>
+
+    <select id="searchMyChatByUserId" resultMap="chatMap" parameterType="java.lang.String">
+        SELECT *
+        FROM chatHistory
+        WHERE (userid = #{userid} or sendedUserId = #{userid})
+        order by applyTime desc
+    </select>
+
+    <update id="updateChat" parameterType="com.tencent.wxcloudrun.model.ChatRecode">
+        UPDATE chatHistory
+        SET recovers = #{recovers}
+        WHERE id=#{id};
+    </update>
+
+    <update id="updateChatread" parameterType="com.tencent.wxcloudrun.model.ChatRecode">
+        UPDATE chatHistory
+        SET isread = 1
+        WHERE (userid = #{userid} and sendedUserId = #{sendedUserId})
+           or (userid = #{sendedUserId} and sendedUserId = #{userid});
+    </update>
+
+    <insert id="insertChat" parameterType="com.tencent.wxcloudrun.model.ChatRecode">
+        insert into chatHistory(id,sendedUserId,userid,contents,applyTime)
+            VALUE(#{id},#{sendedUserId},#{userid},#{contents},now())
+    </insert>
+
+</mapper>

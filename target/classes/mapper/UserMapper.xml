@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.UserMapper">
+
+    <resultMap id="userMapper" type="com.tencent.wxcloudrun.model.User">
+        <id property="userId" column="user_id"/>
+        <result property="openId" column="open_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="profileImageUrl" column="profile_image_url"/>
+        <result property="location" column="location"/>
+        <result property="locationId" column="location_id"/>
+        <result property="gender" column="gender"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="wechatId" column="wechat_id"/>
+    </resultMap>
+
+    <select id="searchUserByUserName" resultMap="userMapper" parameterType="java.lang.String">
+        SELECT *
+        FROM Users
+        WHERE user_name like concat('%', #{target}, '%')
+    </select>
+
+    <select id="getUserByUserId" resultMap="userMapper" parameterType="java.lang.String">
+        SELECT *
+        FROM Users
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getUserByOpenId" resultMap="userMapper" parameterType="java.lang.String">
+        SELECT *
+        FROM Users
+        WHERE open_id = #{openId}
+    </select>
+
+    <select id="getBasicUserInfo" resultMap="userMapper" parameterType="java.lang.String">
+        SELECT `user_name`, `profile_image_url`
+        FROM Users
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getAllUserId" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT `user_id`
+        FROM Users
+    </select>
+
+    <insert id="createUser" parameterType="com.tencent.wxcloudrun.model.User">
+        INSERT INTO `Users`(`user_id`, `open_id`, `user_name`, `profile_image_url`, `location`, `location_id`, `gender`, `longitude`, `latitude`)
+            VALUE(#{userId}, #{openId}, #{userName}, #{profileImageUrl}, #{location}, #{locationId}, #{gender}, #{longitude}, #{latitude})
+    </insert>
+
+    <update id="updateUserInformation" parameterType="com.tencent.wxcloudrun.model.User">
+
+        UPDATE Users
+        SET user_name=#{userName}, location=#{location}, location_id=#{locationId}, gender=#{gender}, wechat_id=#{wechatId}, profile_image_url=#{profileImageUrl}
+        WHERE open_id=#{openId};
+    </update>
+
+
+</mapper>

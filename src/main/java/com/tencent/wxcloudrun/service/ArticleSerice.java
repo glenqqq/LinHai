@@ -13,7 +13,7 @@ public interface ArticleSerice {
 
     List<Article> searchArticleByTitle(String target);
 
-    List<Article> getRecentTenArticles();
+    List<Article> getRecentTenArticles(int pageNo, int pageSize,int articleType, Integer order,String title);
     List<Article> getArticleByUserId(String userId);
     Integer getArticleNumByUserId(String userId);
     void hideArticle(String articleId);

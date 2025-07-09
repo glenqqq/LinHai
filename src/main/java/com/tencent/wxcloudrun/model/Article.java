@@ -32,6 +32,7 @@ public class Article {
     private String authorProfileUrl;
     private BigDecimal latitude;
     private BigDecimal longitude;
+    private BigDecimal distance;//相距
 
     private Long likeCount;
     private Long viewCount;
@@ -39,4 +40,33 @@ public class Article {
     private Boolean isStickTop;
     private String images;
     private Boolean isHidden;
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "articleId='" + articleId + '\'' +
+                ", title='" + title + '\'' +
+                ", articleType=" + articleType +
+                ", merchantCategory='" + merchantCategory + '\'' +
+                ", content='" + content + '\'' +
+                ", price=" + price +
+                ", isDeliveryCovered=" + isDeliveryCovered +
+                ", deliveryMethod=" + deliveryMethod +
+                ", location='" + location + '\'' +
+                ", isNeedHelp=" + isNeedHelp +
+                ", createTimestamp=" + createTimestamp +
+                ", updateTimestamp=" + updateTimestamp +
+                ", authorName='" + authorName + '\'' +
+                ", authorId='" + authorId + '\'' +
+                ", authorProfileUrl='" + authorProfileUrl + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", likeCount=" + likeCount +
+                ", viewCount=" + viewCount +
+                ", colCount=" + colCount +
+                ", isStickTop=" + isStickTop +
+                ", images='" + images + '\'' +
+                ", isHidden=" + isHidden +
+                '}';
+    }
 }

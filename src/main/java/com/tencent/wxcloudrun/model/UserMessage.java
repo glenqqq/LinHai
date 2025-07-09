@@ -22,5 +22,4 @@ public class UserMessage {
     private User commentingUser;
     private Article article;
     private Long createTimestamp;
-
 }

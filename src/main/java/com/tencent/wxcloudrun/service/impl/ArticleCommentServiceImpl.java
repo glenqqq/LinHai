@@ -105,6 +105,10 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         }
 
         for (SubComments subComment : subComments) {
+            if (subComment.getRootCommentAuthorId() != null) {
+                User userByUserId = userMapper.getUserByUserId(subComment.getRootCommentAuthorId());
+                subComment.setRootCommentAuthorName(userByUserId.getUserName());
+            }
             if (repliedCommentIdToComments.containsKey(subComment.getRootCommentId())) {
                 repliedCommentIdToComments.get(subComment.getRootCommentId()).add(subComment);
             }

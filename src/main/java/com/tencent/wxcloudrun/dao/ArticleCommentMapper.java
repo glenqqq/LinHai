@@ -12,4 +12,6 @@ public interface ArticleCommentMapper {
 
     List<ArticleComment> getFirstLevelCommentsForArticle(@Param("articleId") String articleId);
     List<ArticleComment> getSubCommentsForArticle(@Param("articleId") String articleId);
+    List<ArticleComment> getCommentsForUserid(@Param("userid") String userid);
+    ArticleComment getCommentsForCommentid(@Param("commentId") String commentId);
 }

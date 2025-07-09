@@ -66,4 +66,10 @@ public class UserMessageServiceImpl implements UserMessageService {
         log.info("read message: {}", messageId);
         userMessageMapper.readMessage(messageId);
     }
+
+    @Override
+    public void unreadMessage(String messageId) {
+        log.info("read message: {}", messageId);
+        userMessageMapper.unreadMessage(messageId);
+    }
 }

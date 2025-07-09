@@ -1,10 +1,8 @@
 package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
-import com.tencent.wxcloudrun.dto.article.CreateArticleRequest;
 import com.tencent.wxcloudrun.dto.user.CreateUserRequest;
 import com.tencent.wxcloudrun.dto.user.UpdateUserRequest;
-import com.tencent.wxcloudrun.model.Article;
 import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.service.UserService;
 import org.slf4j.Logger;
@@ -23,6 +21,12 @@ public class UserController {
     public UserController(@Autowired UserService userService) {
         this.userService = userService;
         this.logger = LoggerFactory.getLogger(UserController.class);
+    }
+
+    @PostMapping(value = "/api/user-management/openId")
+    ApiResponse gteUserByOpenid(@RequestHeader("x-wx-openid") String openId) {
+        final User user = userService.getUserByOpenId(openId);
+        return ApiResponse.ok(user);
     }
 
     @PostMapping(value = "/api/user-management/new-user")

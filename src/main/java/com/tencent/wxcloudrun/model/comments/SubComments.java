@@ -6,6 +6,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 public class SubComments extends ArticleComment{
+    private String rootCommentAuthorName;
     public SubComments(ArticleComment articleComment) {
         this.commentId = articleComment.getCommentId();
         this.content = articleComment.getContent();

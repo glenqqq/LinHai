@@ -7,6 +7,7 @@ import com.tencent.wxcloudrun.model.Article;
 import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.service.ArticleSerice;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,9 +76,11 @@ public class ArticleServiceImpl implements ArticleSerice {
     }
 
     @Override
-    public List<Article> getRecentTenArticles() {
-        List<Article> retrievedArticle = mapper.getRecentTenArticles();
-        Collections.shuffle(retrievedArticle);
+    public List<Article> getRecentTenArticles(int pageNo, int pageSize,int articleType, Integer order,String title) {
+        int offset = (pageNo - 1) * pageSize;
+        System.out.println("articleType:"+articleType);
+        List<Article> retrievedArticle = mapper.getRecentTenArticles(articleType,offset, pageSize , order,title);
+//        Collections.shuffle(retrievedArticle);
         return retrievedArticle;
     }
 

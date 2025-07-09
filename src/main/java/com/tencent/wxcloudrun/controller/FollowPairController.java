@@ -2,7 +2,6 @@ package com.tencent.wxcloudrun.controller;
 
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.dto.followPair.CreateFollowPairRequest;
-import com.tencent.wxcloudrun.model.FollowPair;
 import com.tencent.wxcloudrun.service.FollowPairService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,7 @@ public class FollowPairController {
     }
 
     @PostMapping(value = "/api/follow-pair-management/new-follow-pair")
-    ApiResponse createNewFollowPair(@RequestBody CreateFollowPairRequest request) {
+    ApiResponse createNewFollowPair(@RequestBody CreateFollowPairRequest request) throws Exception {
         return ApiResponse.ok(followPairService.createFollowPair(request));
     }
 

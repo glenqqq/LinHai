@@ -10,4 +10,6 @@ public interface UserMessageService {
     void createSystemMessageForArticle(String article);
 
     void readMessage(String messageId);
+
+    void unreadMessage(String messageId);
 }

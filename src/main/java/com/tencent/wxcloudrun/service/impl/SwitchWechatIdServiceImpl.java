@@ -62,11 +62,21 @@ public class SwitchWechatIdServiceImpl implements SwitchWechatIdService {
     }
 
     @Override
+    public List<SwitchWechatIdPair> getAllSwitchWechatIdRequest(String requestingUserId, String receiverUserId,String resourceArticleId) {
+        return mapper.getAllSwitchWechatIdRequest(requestingUserId,receiverUserId,resourceArticleId);
+    }
+    @Override
+    public List<SwitchWechatIdPair> selectSwitchByRequRece(String requestingUserId, String receiverUserId) {
+        return mapper.selectSwitchByRequRece(requestingUserId,receiverUserId);
+    }
+
+    @Override
     public SwitchWechatIdPair approveSwitchWechatIdRequest(ApproveSwitchWechatIdRequest request) {
         SwitchWechatIdPair pair = SwitchWechatIdPair.builder()
                 .requesterUserId(request.getRequesterUserId())
                 .receiverUserId(request.getReceiverUserId())
                 .approvingStatus(APPROVED)
+                .approveTimestamp(System.currentTimeMillis())
                 .build();
 
         mapper.approveSwitchWechatIdRequest(pair);

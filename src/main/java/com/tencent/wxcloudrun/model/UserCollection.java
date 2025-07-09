@@ -11,4 +11,5 @@ public class UserCollection {
     private String articleAuthorName;
     private String articleTitle;
     private String articlePicUrl;
+    private String crtime;
 }

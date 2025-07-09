@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.FollowMapper">
+
+    <resultMap id="followPair" type="com.tencent.wxcloudrun.model.FollowPair">
+        <id property="followId" column="follow_id"/>
+        <result property="followedUserId" column="followed_user_id"/>
+        <result property="followedUserName" column="followed_user_name"/>
+        <result property="followedUserProfileUrl" column="followed_user_profile_url"/>
+        <result property="followingUserId" column="following_user_id"/>
+        <result property="followingUserName" column="following_user_name"/>
+        <result property="followingUserProfileUrl" column="following_user_profile_url"/>
+    </resultMap>
+
+    <insert id="createFollowPair" parameterType="com.tencent.wxcloudrun.model.FollowPair">
+        INSERT INTO `FollowPairs`(`follow_id`, `followed_user_id`, `followed_user_name`, `followed_user_profile_url`, `following_user_id`, `following_user_name`, `following_user_profile_url`)
+            VALUE(#{followId}, #{followedUserId}, #{followedUserName}, #{followedUserProfileUrl}, #{followingUserId}, #{followingUserName}, #{followingUserProfileUrl})
+    </insert>
+
+    <delete id="deleteFollowPair" parameterType="com.tencent.wxcloudrun.model.FollowPair">
+        delete from `FollowPairs` where `followed_user_id` = #{followedUserId} and `following_user_id` = #{followingUserId}
+    </delete>
+
+    <select id="getByUserIds" resultMap="followPair" parameterType="com.tencent.wxcloudrun.model.FollowPair">
+        SELECT *
+        FROM FollowPairs
+        WHERE following_user_id = #{followingUserId}
+        AND followed_user_id = #{followedUserId}
+    </select>
+
+    <select id="getMyFollowingUser" resultMap="followPair" parameterType="java.lang.String">
+        SELECT *
+        FROM FollowPairs
+        WHERE following_user_id = #{followingUserId}
+    </select>
+
+    <select id="getMyFollowedUser" resultMap="followPair" parameterType="java.lang.String">
+        SELECT *
+        FROM FollowPairs
+        WHERE followed_user_id = #{followedUserId}
+    </select>
+
+</mapper>
