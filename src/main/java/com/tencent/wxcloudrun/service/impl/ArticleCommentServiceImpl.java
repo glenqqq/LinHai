@@ -34,7 +34,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
     @Override
     public String createArticleComment(CreateCommentRequest request) {
         final String commentId = UUID.randomUUID().toString();
-        final String userMessageId = UUID.randomUUID().toString();
+        final String toArticleAuthorMessageId = UUID.randomUUID().toString();
         ArticleComment articleComment = ArticleComment
                 .builder()
                 .commentId(commentId)
@@ -50,7 +50,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 .build();
         mapper.createArticleComment(articleComment);
         UserMessage articleAuthorMessage = UserMessage.builder()
-                .messageId(userMessageId)
+                .messageId(toArticleAuthorMessageId)
                 .receiverUserId(request.getArticleAuthorId())
                 .requestingUserId(request.getAuthorId())
                 .articleId(request.getArticleId())
@@ -61,9 +61,10 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         userMessageMapper.createUserMessage(articleAuthorMessage);
 
         if (null != request.getRootCommentId()) {
+            final String toRootArticleMessageId = UUID.randomUUID().toString();
             UserMessage levelOneCommentMessage = UserMessage.builder()
-                    .messageId(userMessageId)
-                    .receiverUserId(request.getRootCommentId())
+                    .messageId(toRootArticleMessageId)
+                    .receiverUserId(request.getRootCommentAuthorId())
                     .requestingUserId(request.getAuthorId())
                     .articleId(request.getArticleId())
                     .messageType("REPLY")
@@ -74,9 +75,10 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         }
 
         if (null != request.getLeaveCommentId()) {
+            final String toLeafArticleMessageId = UUID.randomUUID().toString();
             UserMessage levelOneCommentMessage = UserMessage.builder()
-                    .messageId(userMessageId)
-                    .receiverUserId(request.getLeaveCommentId())
+                    .messageId(toLeafArticleMessageId)
+                    .receiverUserId(request.getLeaveCommentAuthorId())
                     .requestingUserId(request.getAuthorId())
                     .articleId(request.getArticleId())
                     .messageType("REPLY")
