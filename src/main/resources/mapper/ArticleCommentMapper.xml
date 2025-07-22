@@ -37,11 +37,12 @@
         AND root_comment_id IS NOT NULL
     </select>
 
-    <select id="getCommentsForUserid" resultMap="articleComment" parameterType="java.lang.String">
+    <select id="getCommentsForUserid" resultMap="articleComment" parameterType="map">
         SELECT *
         FROM ArticleComments
-        WHERE article_author_id = #{userid} or root_comment_author_id = #{userid}
-        order by created_timestamp desc
+        WHERE article_author_id = #{userid} OR root_comment_author_id = #{userid}
+        ORDER BY created_timestamp DESC
+        LIMIT #{pageSize} OFFSET #{offset}
     </select>
 
     <select id="getCommentsForCommentid" resultMap="articleComment" parameterType="java.lang.String">

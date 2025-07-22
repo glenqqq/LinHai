@@ -56,9 +56,11 @@ public class CommentController {
     }
 
     @GetMapping(value = "/api/article-comment-management/get-all-comments-for-myuserid/{userid}")
-    ApiResponse getAllCommentsForMoreId(@PathVariable String userid) {
+    ApiResponse getAllCommentsForMoreId(@PathVariable String userid,
+                                        @RequestParam(value = "page") Integer page,
+                                        @RequestParam(value = "pageSize") Integer pageSize) {
         logger.info("用户id article id: {}", userid);
-        final List<ArticleComment> comments = articleCommentMapper.getCommentsForUserid(userid);
+        final List<ArticleComment> comments = articleCommentMapper.getCommentsForUserid(userid, page, pageSize);
 
         List<CommentList> commentListList = new ArrayList<>();
         for (ArticleComment comment : comments) {
