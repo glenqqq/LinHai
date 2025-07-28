@@ -43,9 +43,6 @@ public class CommentController {
     @PostMapping(value = "/api/article-comment-management/new-article-comment")
     ApiResponse createArticle(@RequestBody CreateCommentRequest request) throws Exception {
         logger.info("/api/new-article-comment createArticleComment request: {}", request);
-        Article articleById = articleMapper.getArticleById(request.getArticleId());
-
-        request.setArticleAuthorId(articleById.getAuthorId());
         final String commentId = articleCommentService.createArticleComment(request);
         return ApiResponse.ok(commentId);
     }

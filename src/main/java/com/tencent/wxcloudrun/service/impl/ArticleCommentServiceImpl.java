@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.service.impl;
 
+import com.tencent.wxcloudrun.controller.CommentController;
 import com.tencent.wxcloudrun.dao.ArticleCommentMapper;
 import com.tencent.wxcloudrun.dao.UserMapper;
 import com.tencent.wxcloudrun.dao.UserMessageMapper;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +24,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
     final ArticleCommentMapper mapper;
     final UserMapper userMapper;
     final UserMessageMapper userMessageMapper;
+    final Logger logger;
 
     public ArticleCommentServiceImpl(@Autowired ArticleCommentMapper mapper,
                                      @Autowired UserMapper userMapper,
@@ -28,6 +32,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         this.mapper = mapper;
         this.userMessageMapper = userMessageMapper;
         this.userMapper = userMapper;
+        this.logger = LoggerFactory.getLogger(CommentController.class);
     }
 
 
@@ -35,6 +40,8 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
     public String createArticleComment(CreateCommentRequest request) {
         final String commentId = UUID.randomUUID().toString();
         final String toArticleAuthorMessageId = UUID.randomUUID().toString();
+
+
         ArticleComment articleComment = ArticleComment
                 .builder()
                 .commentId(commentId)
@@ -48,6 +55,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
                 .leaveCommentAuthorId(request.getLeaveCommentAuthorId())
                 .createdTimestamp(System.currentTimeMillis())
                 .build();
+        logger.info("articleComment in service level: {}", articleComment);
         mapper.createArticleComment(articleComment);
         UserMessage articleAuthorMessage = UserMessage.builder()
                 .messageId(toArticleAuthorMessageId)
