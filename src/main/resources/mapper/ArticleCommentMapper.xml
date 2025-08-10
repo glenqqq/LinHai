@@ -37,7 +37,7 @@
         AND root_comment_id IS NOT NULL
     </select>
 
-    <select id="getCommentsForUserid" resultMap="articleComment" parameterType="map">
+    <select id="getCommentsForUserid" resultMap="articleComment">
         SELECT *
         FROM ArticleComments
         WHERE article_author_id = #{userid} OR root_comment_author_id = #{userid}
