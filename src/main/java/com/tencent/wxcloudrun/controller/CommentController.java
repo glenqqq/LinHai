@@ -60,7 +60,7 @@ public class CommentController {
                                         @RequestParam(value = "pageSize") Integer pageSize) {
         logger.info("用户id article id: {}", userid);
         final List<ArticleComment> comments = articleCommentMapper.getCommentsForUserid(userid, page, pageSize);
-
+        logger.info("retrieved article comments: {}", comments);
         List<CommentList> commentListList = new ArrayList<>();
         for (ArticleComment comment : comments) {
             if (comment.getAuthorId().equals(userid)) {
@@ -75,6 +75,7 @@ public class CommentController {
 
             //拿用户信息
             User userByUserId = userMapper.getUserByUserId(comment.getAuthorId());
+            logger.info("retrieved user id: {}", userByUserId);
             commentList.setAuthorId(comment.getAuthorId());
             commentList.setAuthorName(userByUserId == null ? "" : userByUserId.getUserName());
             commentList.setAuthorProfileUrl(userByUserId == null ? "" : userByUserId.getProfileImageUrl());
