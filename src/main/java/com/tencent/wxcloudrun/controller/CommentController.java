@@ -62,46 +62,46 @@ public class CommentController {
         final List<ArticleComment> comments = articleCommentMapper.getCommentsForUserid(userid, page, pageSize);
         logger.info("retrieved article comments: {}", comments);
         List<CommentList> commentListList = new ArrayList<>();
-//        for (ArticleComment comment : comments) {
-//            if (comment.getAuthorId().equals(userid)) {
-//                continue;
-//            }
-//
-//            //循环获取
-//            CommentList commentList = new CommentList();
-//            commentList.setCommentId(comment.getCommentId());
-//
-//            commentList.setContent(comment.getContent());
-//
-//            //拿用户信息
-//            User userByUserId = userMapper.getUserByUserId(comment.getAuthorId());
-//            logger.info("retrieved user id: {}", userByUserId);
-//            commentList.setAuthorId(comment.getAuthorId());
-//            commentList.setAuthorName(userByUserId == null ? "" : userByUserId.getUserName());
-//            commentList.setAuthorProfileUrl(userByUserId == null ? "" : userByUserId.getProfileImageUrl());
-//            commentList.setCreatedTimestamp(comment.getCreatedTimestamp());
-//
-//            Article articleById = articleMapper.getArticleById(comment.getArticleId());
-//            commentList.setArticleId(comment.getArticleId());
-//            commentList.setArticleTitle(articleById.getTitle());
-//            commentList.setArticleImg(articleById.getImages());
-//
-//            if (comment.getRootCommentId() != null) {
-//                commentList.setRootCommentId(comment.getRootCommentId());
-//                commentList.setRootCommentAuthorId(comment.getRootCommentAuthorId());
-//
-//                ArticleComment commentsForCommentid = articleCommentMapper.getCommentsForCommentid(comment.getRootCommentId());
-//                commentList.setRootCommentContent(commentsForCommentid.getContent());
-//                User userByUserId1 = userMapper.getUserByUserId(comment.getRootCommentAuthorId());
-//                if (userByUserId1 != null) {
-//                    commentList.setRootAuthorName(userByUserId1.getUserName());
-//                    commentList.setRootAuthorProfileUrl(userByUserId1.getProfileImageUrl());
-//                }
-//            }
-//            commentListList.add(commentList);
-//        }
+        for (ArticleComment comment : comments) {
+            if (comment.getAuthorId().equals(userid)) {
+                continue;
+            }
 
-        return ApiResponse.ok(comments);
+            //循环获取
+            CommentList commentList = new CommentList();
+            commentList.setCommentId(comment.getCommentId());
+
+            commentList.setContent(comment.getContent());
+
+            //拿用户信息
+            User userByUserId = userMapper.getUserByUserId(comment.getAuthorId());
+            logger.info("retrieved user id: {}", userByUserId);
+            commentList.setAuthorId(comment.getAuthorId());
+            commentList.setAuthorName(userByUserId == null ? "" : userByUserId.getUserName());
+            commentList.setAuthorProfileUrl(userByUserId == null ? "" : userByUserId.getProfileImageUrl());
+            commentList.setCreatedTimestamp(comment.getCreatedTimestamp());
+
+            Article articleById = articleMapper.getArticleById(comment.getArticleId());
+            commentList.setArticleId(comment.getArticleId());
+            commentList.setArticleTitle(articleById.getTitle());
+            commentList.setArticleImg(articleById.getImages());
+
+            if (comment.getRootCommentId() != null) {
+                commentList.setRootCommentId(comment.getRootCommentId());
+                commentList.setRootCommentAuthorId(comment.getRootCommentAuthorId());
+
+                ArticleComment commentsForCommentid = articleCommentMapper.getCommentsForCommentid(comment.getRootCommentId());
+                commentList.setRootCommentContent(commentsForCommentid.getContent());
+                User userByUserId1 = userMapper.getUserByUserId(comment.getRootCommentAuthorId());
+                if (userByUserId1 != null) {
+                    commentList.setRootAuthorName(userByUserId1.getUserName());
+                    commentList.setRootAuthorProfileUrl(userByUserId1.getProfileImageUrl());
+                }
+            }
+            commentListList.add(commentList);
+        }
+
+        return ApiResponse.ok(commentListList);
     }
 
 
