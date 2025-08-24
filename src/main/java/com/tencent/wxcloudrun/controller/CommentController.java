@@ -5,6 +5,8 @@ import com.tencent.wxcloudrun.dao.ArticleCommentMapper;
 import com.tencent.wxcloudrun.dao.ArticleMapper;
 import com.tencent.wxcloudrun.dao.UserMapper;
 import com.tencent.wxcloudrun.dto.comment.CreateCommentRequest;
+import com.tencent.wxcloudrun.model.Article;
+import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.model.comments.ArticleComment;
 import com.tencent.wxcloudrun.model.comments.CommentList;
 import com.tencent.wxcloudrun.service.ArticleCommentService;
@@ -17,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 
 
 import java.util.ArrayList;
@@ -103,4 +103,6 @@ public class CommentController {
 
         return ApiResponse.ok(comments);
     }
+
+
 }
