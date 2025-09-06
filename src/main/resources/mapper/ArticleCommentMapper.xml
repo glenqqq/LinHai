@@ -42,7 +42,6 @@
         FROM ArticleComments
         WHERE article_author_id = #{userid} OR root_comment_author_id = #{userid}
         ORDER BY created_timestamp DESC
-        LIMIT #{pageSize} OFFSET #{offset}
     </select>
 
     <select id="getCommentsForCommentid" resultMap="articleComment" parameterType="java.lang.String">
